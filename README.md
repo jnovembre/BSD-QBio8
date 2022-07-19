@@ -1,4 +1,4 @@
-# BSD-QBio7
+# BSD-QBio8
 
 Repository for the seventh edition of the University of Chicago's *BSD
 Quantitative Biology Bootcamp.*
@@ -13,7 +13,7 @@ to get access, email John your GitHub ID.
 You can find a webpage explaining how to download the data and prepare
 your laptop for the bootcamp here:
 
-Link: [Preparing your computer and yourself for QBio7.](https://jnovembre.github.io/BSD-QBio7/)
+Link: [Preparing your computer and yourself for QBio8.](https://jnovembre.github.io/BSD-QBio8/)
 
 #### Notes
 
