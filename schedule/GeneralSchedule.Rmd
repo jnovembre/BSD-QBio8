@@ -1,0 +1,111 @@
+---
+fontsize: 10pt
+geometry: margin=0.75in
+header-includes:
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \usepackage{lmodern}
+  - \usepackage{xcolor}
+  - \usepackage{sectsty}
+  - \definecolor{bsdqbio}{rgb}{0.44, 0.16, 0.39}
+  - \sectionfont{\color{bsdqbio}}
+  - \subsectionfont{\color{bsdqbio}}
+  - \subsubsectionfont{\color{bsdqbio}}
+  - \setlength\heavyrulewidth{0ex}
+output:
+  pdf_document:
+    fig_height: 2
+    latex_engine: xelatex
+    keep_tex: true
+    pandoc_args: ["numberLines"]
+---
+# BSD qBio$^7$ @ MBL
+
+## General Schedule
+### Thursday, September 9 
+
+------------------    ---------------------------------------------------------------------------
+**10:30-11:00**       Check-in with TAs at BSLC lobby                                            
+**11:00-11:20**       Welcome to qBio7 - Novembre and Cobey                                      
+**11:20-12:00**       Team-building activities                                                   
+**12:00-1:30**        Lunch and group compacts                                                   
+**1:30-3:00**         Basic/Advanced comp. I                                                     
+**3:00-3:30**         Coffee break                                                               
+**3:30-5:00**         Basic/Advanced comp. I                                                     
+------------------    ---------------------------------------------------------------------------
+
+### Friday, September 10 
+
+------------------    ---------------------------------------------------------------------------
+**8:30-10:00**        Basic/Advanced comp. II                                                    
+**10:00-10:30**       Coffee break                                                               
+**10:30-12:00**       Basic/Advanced comp. II                                                    
+**12:00-1:30**        Lunch                                                                      
+**1:30-2:00**         Welcome to UChicago Biosciences - Prince                                   
+**2:00-3:45**         Professional development with TAs                                          
+**3:45-4:15**         Coffee break                                                               
+**4:15-5:00**         Science Faculty Star - Brent Doiron, Depts of Neurobiology and Statistics  
+------------------    ---------------------------------------------------------------------------
+
+### Monday, September 13 
+
+------------------    ---------------------------------------------------------------------------
+**8:30-10:00**        Data visualization - Carbonetto                                             (*C.jacchus D.rerio P.polytes T.thermophila*)
+                      Defensive programming - Cobey                                               (*A.thaliana C.elegans T.roseae X.laevis*)
+                      Statistics for a data rich world - L. Chen                                  (*D.melanogaster M.musculus O.bimaculoides S.aegyptiacus*)
+**10:00-10:30**       Coffee break                                                               
+**10:30-12:00**       Data visualization - Carbonetto                                             (*C.jacchus D.rerio P.polytes T.thermophila*)
+                      Defensive programming - Cobey                                               (*A.thaliana C.elegans T.roseae X.laevis*)
+                      Statistics for a data rich world - L. Chen                                  (*D.melanogaster M.musculus O.bimaculoides S.aegyptiacus*)
+**12:00-1:30**        Lunch                                                                      
+**1:30-3:00**         Data visualization - Carbonetto                                             (*A.thaliana M.musculus O.bimaculoides X.laevis*)
+                      Defensive programming - Cobey                                               (*D.melanogaster D.rerio S.aegyptiacus T.thermophila*)
+                      Statistics for a data rich world - L. Chen                                  (*C.elegans C.jacchus P.polytes T.roseae*)
+**3:00-3:30**         Coffee break                                                               
+**3:30-5:00**         Data visualization - Carbonetto                                             (*A.thaliana M.musculus O.bimaculoides X.laevis*)
+                      Defensive programming - Cobey                                               (*D.melanogaster D.rerio S.aegyptiacus T.thermophila*)
+                      Statistics for a data rich world - L. Chen                                  (*C.elegans C.jacchus P.polytes T.roseae*)
+------------------    ---------------------------------------------------------------------------
+
+### Tuesday, September 14 
+
+------------------    ---------------------------------------------------------------------------
+**8:30-10:00**        Data visualization - Carbonetto                                             (*C.elegans D.melanogaster S.aegyptiacus T.roseae*)
+                      Defensive programming - Cobey                                               (*C.jacchus M.musculus O.bimaculoides P.polytes*)
+                      Statistics for a data rich world - L. Chen                                  (*A.thaliana D.rerio T.thermophila X.laevis*)
+**10:00-10:30**       Coffee break                                                               
+**10:30-12:00**       Data visualization - Carbonetto                                             (*C.elegans D.melanogaster S.aegyptiacus T.roseae*)
+                      Defensive programming - Cobey                                               (*C.jacchus M.musculus O.bimaculoides P.polytes*)
+                      Statistics for a data rich world - L. Chen                                  (*A.thaliana D.rerio T.thermophila X.laevis*)
+**12:00-1:30**        Lunch                                                                      
+**1:30-3:00**         Workshop - Immunology - Khan                                                (*A.thaliana C.elegans D.rerio X.laevis*)
+                      Workshop - Population genetics - Berg                                       (*D.melanogaster M.musculus S.aegyptiacus T.roseae*)
+                      Workshop - Transcriptomics - M. Chen                                        (*C.jacchus O.bimaculoides P.polytes T.thermophila*)
+**3:00-3:30**         Coffee break                                                               
+**3:30-5:00**         Workshop - Immunology - Khan                                                (*A.thaliana C.elegans D.rerio X.laevis*)
+                      Workshop - Population genetics - Berg                                       (*D.melanogaster M.musculus S.aegyptiacus T.roseae*)
+                      Workshop - Transcriptomics - M. Chen                                        (*C.jacchus O.bimaculoides P.polytes T.thermophila*)
+------------------    ---------------------------------------------------------------------------
+
+### Wednesday, September 15 
+
+------------------    ---------------------------------------------------------------------------
+**8:30-10:00**        Workshop - Immunology - Khan                                                (*C.jacchus D.melanogaster T.roseae T.thermophila*)
+                      Workshop - Population genetics - Berg                                       (*A.thaliana C.elegans O.bimaculoides P.polytes*)
+                      Workshop - Transcriptomics - M. Chen                                        (*D.rerio M.musculus S.aegyptiacus X.laevis*)
+**10:00-10:30**       Coffee break                                                               
+**10:30-12:00**       Workshop - Immunology - Khan                                                (*C.jacchus D.melanogaster T.roseae T.thermophila*)
+                      Workshop - Population genetics - Berg                                       (*A.thaliana C.elegans O.bimaculoides P.polytes*)
+                      Workshop - Transcriptomics - M. Chen                                        (*D.rerio M.musculus S.aegyptiacus X.laevis*)
+**12:00-1:30**        Lunch                                                                      
+**1:30-3:00**         Workshop - Immunology - Khan                                                (*M.musculus O.bimaculoides P.polytes S.aegyptiacus*)
+                      Workshop - Population genetics - Berg                                       (*C.jacchus D.rerio T.thermophila X.laevis*)
+                      Workshop - Transcriptomics - M. Chen                                        (*A.thaliana C.elegans D.melanogaster T.roseae*)
+**3:00-3:30**         Coffee break                                                               
+**3:30-5:00**         Workshop - Immunology - Khan                                                (*M.musculus O.bimaculoides P.polytes S.aegyptiacus*)
+                      Workshop - Population genetics - Berg                                       (*C.jacchus D.rerio T.thermophila X.laevis*)
+                      Workshop - Transcriptomics - M. Chen                                        (*A.thaliana C.elegans D.melanogaster T.roseae*)
+**5:15-5:45**         Wrap-up                                                                    
+**5:45-7:30**         Reception with Dean's Council Students                                     
+------------------    ---------------------------------------------------------------------------
+

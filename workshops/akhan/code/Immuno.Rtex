@@ -1,0 +1,545 @@
+\documentclass{tufte-book} 
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+\hypersetup{colorlinks} % Comment this line if you don't wish to have colored links
+
+\usepackage{microtype} % Improves character and word spacing
+\usepackage[leftbars]{changebar}
+\setlength{\changebarsep}{-20pt}
+\setlength{\changebarwidth}{2pt}
+\newcounter{example}
+\newenvironment{exampl}
+    {
+        \par\vspace{10pt}
+        \begin{enumerate}
+            \item[]
+                \refstepcounter{example}
+                \noindent
+                \cbstart
+
+    }
+    {
+                \cbend
+        \end{enumerate}
+    }
+
+
+
+\usepackage{lipsum} % Inserts dummy text
+
+\usepackage{booktabs} % Better horizontal rules in tables
+
+\usepackage{graphicx} % Needed to insert images into the document
+\graphicspath{{graphics/}} % Sets the default location of pictures
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio} % Improves figure scaling
+
+\usepackage{fancyvrb} % Allows customization of verbatim environments
+\fvset{fontsize=\normalsize} % The font size of all verbatim text can be changed here
+
+\newcommand{\hangp}[1]{\makebox[0pt][r]{(}#1\makebox[0pt][l]{)}} % New command to create parentheses around text in tables which take up no horizontal space - this improves column spacing
+\newcommand{\hangstar}{\makebox[0pt][l]{*}} % New command to create asterisks in tables which take up no horizontal space - this improves column spacing
+
+\usepackage{xspace} % Used for printing a trailing space better than using a tilde (~) using the \xspace command
+
+\newcommand{\monthyear}{\ifcase\month\or January\or February\or March\or April\or May\or June\or July\or August\or September\or October\or November\or December\fi\space\number\year} % A command to print the current month and year
+
+\newcommand{\openepigraph}[2]{ % This block sets up a command for printing an epigraph with 2 arguments - the quote and the author
+\begin{fullwidth}
+\sffamily\large
+\begin{doublespace}
+\noindent\allcaps{#1}\\ % The quote
+\noindent\allcaps{#2} % The author
+\end{doublespace}
+\end{fullwidth}
+}
+
+\newcommand{\blankpage}{\newpage\hbox{}\thispagestyle{empty}\newpage} % Command to insert a blank page
+
+\usepackage{units} % Used for printing standard units
+
+\newcommand{\hlred}[1]{\textcolor{Maroon}{#1}} % Print text in maroon
+\newcommand{\hangleft}[1]{\makebox[0pt][r]{#1}} % Used for printing commands in the index, moves the slash left so the command name aligns with the rest of the text in the index 
+\newcommand{\hairsp}{\hspace{1pt}} % Command to print a very short space
+\newcommand{\ie}{\textit{i.\hairsp{}e.}\xspace} % Command to print i.e.
+\newcommand{\eg}{\textit{e.\hairsp{}g.}\xspace} % Command to print e.g.
+\newcommand{\na}{\quad--} % Used in tables for N/A cells
+\newcommand{\measure}[3]{#1/#2$\times$\unit[#3]{pc}} % Typesets the font size, leading, and measure in the form of: 10/12x26 pc.
+\newcommand{\tuftebs}{\symbol{'134}} % Command to print a backslash in tt type in OT1/T1
+
+\providecommand{\XeLaTeX}{X\lower.5ex\hbox{\kern-0.15em\reflectbox{E}}\kern-0.1em\LaTeX}
+\newcommand{\tXeLaTeX}{\XeLaTeX\index{XeLaTeX@\protect\XeLaTeX}} % Command to print the XeLaTeX logo while simultaneously adding the position to the index
+
+\newcommand{\doccmdnoindex}[2][]{\texttt{\tuftebs#2}} % Command to print a command in texttt with a backslash of tt type without inserting the command into the index
+
+\newcommand{\doccmddef}[2][]{\hlred{\texttt{\tuftebs#2}}\label{cmd:#2}\ifthenelse{\isempty{#1}} % Command to define a command in red and add it to the index
+{ % If no package is specified, add the command to the index
+\index{#2 command@\protect\hangleft{\texttt{\tuftebs}}\texttt{#2}}% Command name
+}
+{ % If a package is also specified as a second argument, add the command and package to the index
+\index{#2 command@\protect\hangleft{\texttt{\tuftebs}}\texttt{#2} (\texttt{#1} package)}% Command name
+\index{#1 package@\texttt{#1} package}\index{packages!#1@\texttt{#1}}% Package name
+}}
+
+\newcommand{\doccmd}[2][]{% Command to define a command and add it to the index
+\texttt{\tuftebs#2}%
+\ifthenelse{\isempty{#1}}% If no package is specified, add the command to the index
+{%
+\index{#2 command@\protect\hangleft{\texttt{\tuftebs}}\texttt{#2}}% Command name
+}
+{%
+\index{#2 command@\protect\hangleft{\texttt{\tuftebs}}\texttt{#2} (\texttt{#1} package)}% Command name
+\index{#1 package@\texttt{#1} package}\index{packages!#1@\texttt{#1}}% Package name
+}}
+
+% A bunch of new commands to print commands, arguments, environments, classes, etc within the text using the correct formatting
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}
+\newenvironment{docspec}{\begin{quotation}\ttfamily\parskip0pt\parindent0pt\ignorespaces}{\end{quotation}}
+\newcommand{\docenv}[1]{\texttt{#1}\index{#1 environment@\texttt{#1} environment}\index{environments!#1@\texttt{#1}}}
+\newcommand{\docenvdef}[1]{\hlred{\texttt{#1}}\label{env:#1}\index{#1 environment@\texttt{#1} environment}\index{environments!#1@\texttt{#1}}}
+\newcommand{\docpkg}[1]{\texttt{#1}\index{#1 package@\texttt{#1} package}\index{packages!#1@\texttt{#1}}}
+\newcommand{\doccls}[1]{\texttt{#1}}
+\newcommand{\docclsopt}[1]{\texttt{#1}\index{#1 class option@\texttt{#1} class option}\index{class options!#1@\texttt{#1}}}
+\newcommand{\docclsoptdef}[1]{\hlred{\texttt{#1}}\label{clsopt:#1}\index{#1 class option@\texttt{#1} class option}\index{class options!#1@\texttt{#1}}}
+\newcommand{\docmsg}[2]{\bigskip\begin{fullwidth}\noindent\ttfamily#1\end{fullwidth}\medskip\par\noindent#2}
+\newcommand{\docfilehook}[2]{\texttt{#1}\index{file hooks!#2}\index{#1@\texttt{#1}}}
+\newcommand{\doccounter}[1]{\texttt{#1}\index{#1 counter@\texttt{#1} counter}}
+
+\usepackage{makeidx} % Used to generate the index
+\makeindex % Generate the index which is printed at the end of the document
+
+% This block contains a number of shortcuts used throughout the book
+\newcommand{\vdqi}{\textit{VDQI}\xspace}
+\newcommand{\ei}{\textit{EI}\xspace}
+\newcommand{\ve}{\textit{VE}\xspace}
+\newcommand{\be}{\textit{BE}\xspace}
+\newcommand{\VDQI}{\textit{The Visual Display of Quantitative Information}\xspace}
+\newcommand{\EI}{\textit{Envisioning Information}\xspace}
+\newcommand{\VE}{\textit{Visual Explanations}\xspace}
+\newcommand{\BE}{\textit{Beautiful Evidence}\xspace}
+\newcommand{\TL}{Tufte-\LaTeX\xspace}
+
+\renewcommand{\thepage}{9--\arabic{page}}
+\fancyfoot[C]{\thepage}
+\fancyhead{}
+
+%----------------------------------------------------------------------------------------
+%	BOOK META-INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Computational Immunobiology} % Title of the book
+
+\author[Computational Immunobiology]{Computational Immunobiology} % Author
+
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+
+\chapter{Workshop on Computational Immunobiology}
+\Large Aly A. Khan\textsuperscript{1}, Matt Schechter\textsuperscript{2}
+
+\Large 
+\textsuperscript{1}Course Instructor; aakhan@uchicago.edu\\ 
+
+\textsuperscript{2}Course Assistant; mschechter@uchicago.edu\\
+\begin{fullwidth}
+
+\itshape \normalsize \newthought{There’s a joke about immunology}, which Jessica Metcalf of Princeton recently told me. An immunologist and a cardiologist are kidnapped. The kidnappers threaten to shoot one of them, but promise to spare whoever has made the greater contribution to humanity. The cardiologist says, “Well, I’ve identified drugs that have saved the lives of millions of people.” Impressed, the kidnappers turn to the immunologist. “What have you done?” they ask. The immunologist says, “The thing is, the immune system is very complicated ... ” And the cardiologist says, “Just shoot me now.” \textnormal{\normalsize {--- Yong, Ed. “Immunology Is Where Intuition Goes to Die", The Atlantic, Aug. 2020.}}
+
+
+\end{fullwidth}
+
+\newthought{Welcome}. This workshop will introduce a few useful concepts for computationally thinking about the immune system. Immunology is currently undergoing a data-driven revolution, where advances in computer science and high-throughput technologies are allowing us to approach questions that previously could not be answered using purely experimental approaches or standard reductionist techniques. \marginnote{\textbf{BSD courses:} Other courses that may broaden your experience in quantitative and computational immunology include: Microbial 'Omics (BIOS 25420) and Quantitative Immunobiology (IMMU 34800).} In this workshop we will explore two concepts: 
+
+\begin{enumerate}
+  \item What are some methods for characterizing the phenotypic diversity and population structure of immune cells?
+  \item How can statistical modeling be used to make useful predictions about the immune system?
+\end{enumerate}
+
+\newthought{What is the immune system?} The immune system can be viewed as a loosely connected network of cells that interact to solve problems that are beyond the individual capabilities of each cell. At the same time, the immune system has the ability to communicate between cells, coordinate collective action, and remember past events. The field of immunology has amassed a vast and specialized body of knowledge describing the common biological mechanisms underlying host defense, transplantation, autoimmunity, tumor immunology, allergy, and other clinical challenges.
+
+The immune system's role in host defense is frequently framed by an attacked host (e.g., self) against alien invaders (e.g. non-self; viruses, bacteria, cancer cells, etc). This conflict has serious ramifications. Because collateral damage and misfiring can cause significant harm, the immune system must function precisely to distinguish between self and non-self (e.g. autoimmunity, allergy, etc). Strikingly, we still do not fully understand how the immune system accomplishes this exquisite role or why certain individuals develop autoimmunity.
+
+We hope that as you progress through your graduate studies, you will notice that there are a myriad of exciting opportunities available to biologists who are willing to cross and explore the traditional boundaries between immunology and computer science.
+
+\section{\textbf{1. Visualizing the population structure of immune cells}} \marginnote{This section is adapted from Neu et al., Trends in Immunology, 2017.}
+
+\newthought{In the past decade} advances in computing and next-generation sequencing technologies have ushered in a new era of discovery in immunology. In particular, single cell RNA-seq (scRNA-seq) \marginnote{\textbf{scRNA-seq} is RNA-seq performed on an individual cell. The cellular mRNA is amplified through oligos specific for the 5' or 3' tail of mRNA molecules or random hexamers.} has enabled an unprecedented view of gene expression in single cells. A key challenge lies in visualizing single cell gene expression data in a biologically meaningful way while remaining robust to the high levels of noise that is present in single cell data. 
+
+One of the most compelling applications of single-cell genomics to immunology resides in characterizing the population structure of single cells. Visualization of scRNA-seq data can help to identify rare and intermediate subpopulations that are often overlooked with bulk RNA-seq data. \marginnote{\textbf{Dimensionality reduction} is a process to reduce the number of variables to a compressed set of principal variables. More specifically, dimensionality reduction can be understood as projecting the data from the original high-dimensional space into much lower-dimensional space, while (roughly) capturing the concerned statistical properties (e.g., variation, distribution) and/or structure property (e.g., clusters). High-dimensional data after dimensionality reduction are easier to store and faster for downstream computation. Moreover, when projecting the data to two- or three-dimensional space, it is also easier for visualization.} The goal of visualization algorithms is to project high-dimensional data into a low-dimensional space, resolving cellular groups based on transcriptional similarity without the use of predetermined markers to determine their identity. In this section, we will look at two common dimensionality reduction algorithms that are used to visualize scRNA-seq data.
+
+\subsection{\textbf{Exercise 1.1}}
+\subsection{Exercise 1.1 --- Overview discussion}
+Our goal for this exercise is to load and examine some real world scRNA-seq data. If you are new to scRNA-seq, let's take a moment to consider how and what format such data could be stored in. Let's also discuss what might be some prerequisite steps for analyzing it, such as quality control. We can also review concepts such as data sparsity, dimensionality reduction, and batch correction.
+
+\subsection{Exercise 1.1 --- Data wrangling}
+Let's begin by downloading some scRNA-seq data. For this exercise we will be using data published as part of a study examining certain B cells in humans after influenza vaccination (Neu et al., JCI, 2019). \marginnote{\textbf{GEO} is a database managed by the NIH and functions as a public repository of high throughput sequencing and microarray data.}  We will download pre-processed supplementary data from the GEO database: \url{https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE116500}. Scroll to the bottom of the page to locate the supplementary data.
+
+\begin{figure}
+\includegraphics{graphics/download.pdf}
+\caption[Supplementary data][6pt]{The supplementary data can be found at the bottom of the page, and has has already been pre-processed.}
+\label{fig:textfig}
+\end{figure}
+\noindent The resulting csv.gz file contains single cell gene expression data for nearly 300 B cells. Let's load the data in R:
+
+<<eval = FALSE>>=
+# load data
+geo <- read.csv('./data/GSE116500_Limma_adj_4.csv.gz', 
+    row.names = 1, header = TRUE)
+@
+
+\noindent How many genes and cells are in the data? Let's try looking at the dimensions of the data:
+
+<<eval = FALSE>>=
+# number of rows (Genes) and columns (cells)
+dim(geo)
+num_genes <- dim(geo)[1]
+num_cells <- dim(geo)[2]
+@
+
+
+\noindent To made things easier for subsequent steps, let's take the transpose of the data so that each row denotes a cell and each column denotes a gene. The transpose of a matrix is an operation which flips a matrix over its diagonal; that is, it switches the row and column indices. This can facilitate certain types of linear algebraic operations and calculations which operate on columns by default.
+
+<<eval = FALSE>>=
+# current data with genes by cells
+dim(geo)
+
+# transpose data to cells by genes
+geo <- t(geo)
+dim(geo)
+@
+
+
+\noindent Our assumption is that most gene expression in scRNA-seq data contains random noise due to technical variation. We would like to focus our analyses on genes with high variability, which may have a biological basis. For the purposes of this exercise we simply calculate variance of gene expression as a way to rank genes, but we note other methods (e.g. coefficient of variation) can be used as well.
+
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{graphics/hist.pdf}
+\caption{Histogram of gene expression variances.}
+\label{fig:marginfig}
+\end{marginfigure}
+<<eval = FALSE>>=
+# Let's identify highly variable genes based on
+# variance.
+VARs <- apply(geo, 2, var)
+
+# What is the distribution of variances?
+hist(VARs)
+@
+
+
+\subsection{Exercise 1.1 --- Results discussion}
+What does our analysis of gene expression variance suggest to us about what is changing inside these cells?  How should this observation inform our downstream tasks, such as data visualization?
+
+\subsection{\textbf{Exercise 1.2}}
+\subsection{Exercise 1.2 --- Overview discussion}
+Our goal for this exercise is to visualize our scRNA-seq data. Taking into account our observations about gene expression variances, how might we want to filter or pre-process our data? What is our intuition about good low-dimensional projections? Also, how can we evaluate the quality of our visualization?
+
+
+
+\subsection{Exercise 1.2 --- Data Visualization}
+
+As we discussed earlier, we would like to focus our analyses on genes with high variability, which may have a biological basis.  Let's select some top highly variable genes.
+
+<<eval = FALSE>>=
+# we usually pick the top 1000 - 2000 highly
+#   variable genes (HVGs)
+hvgs <- names(sort(VARs, decreasing = TRUE))[1:2000]
+geo.hvg <- as.data.frame(geo[,hvgs])
+dim(geo.hvg)
+@
+
+\noindent We should now have a matrix of 295 cells with the top 2000 most highly variable genes.
+\hbox{}
+\noindent One fact that we did not reveal earlier is that these cells are plasmablasts, which are B cells that secrete antibodies. \marginnote{\textbf{Immunoglobulin isotype} can be thought of as a molecular classification for antibodies.}   We will now classify the type (or isotype) of antibodies these B cells are secreting by comparing the expression of IgA and IgG genes.  In order to help qualitatively examine various types of dimensionality reduction techniques, we will classify and label each cell with their most highly expressed isotype:
+
+<<eval = FALSE>>=
+# There are multiple genes that encode subclasses 
+# of the two isotypes in this data: IgA and IgG
+
+# Grab max IgA values across all genes
+IgA <- cbind(geo.hvg$IGHA1,geo.hvg$IGHA2)
+IgA_max <- as.matrix(apply( IgA, 1, max))
+#Set column name to 'IgA'
+colnames(IgA_max) <- 'IgA'
+
+# Grab max IgG values across all genes
+IgG <- cbind(geo.hvg$IGHG1,geo.hvg$IGHG2,
+    geo.hvg$IGHG3,geo.hvg$IGHG4)
+IgG_max <- as.matrix(apply( IgG, 1, max))
+#Set column name to 'IgG'
+colnames(IgG_max) <- 'IgG'
+
+#Determine if IgA is higher or IgG is higher
+Ig <- cbind(IgA_max,IgG_max)
+Ig_max <- colnames(Ig)[(apply( Ig, 1, which.max))]
+@
+\noindent We have now classified cells as IgA or IgG expressing plasmablasts.
+
+
+\newthought{Principal component analysis (PCA)} \marginnote{\textbf{PCA} is a linear dimensionality reduction algorithm, used to project high dimension data into a few ‘components’ that capture most of the variability in the data. It is a popular visualization technique that can help identify patterns or connections between samples.} is a linear dimensionality reduction algorithm that is often the first-step in visualizing high-dimensional data. We will need to use some functions from \docenvdef{ggplot2} in order to  visualize our scRNA-seq data using PCA. Let's load the R package:
+
+<<eval = FALSE>>=
+library("ggplot2")
+@
+
+\noindent As a general rule of thumb, if you get an error message saying there is no package titled \docenvdef{ggplot2} you may need to first install the appropriate package: 
+
+<<eval = FALSE>>=
+install.packages("ggplot2")
+@
+
+
+\noindent PCA takes an input of correlations between cells based on gene expression data, and identifies principal components corresponding to linear combinations of genes, which cumulatively capture the variability of the total dataset.  When the data is projected against the first few components, which account for the largest amount of variation, distinct populations can be visually and biologically interpreted. Let's perform PCA:
+<<eval = FALSE>>=
+# Let's perform PCA
+geo.pca <- prcomp(geo.hvg, center = TRUE, 
+    scale = TRUE) 
+plot_pc_data <- data.frame(
+    PC1=geo.pca[["x"]][,'PC1'], 
+    PC2=geo.pca[["x"]][,'PC2'])    
+@
+
+
+\noindent Let's use the top two principal components to visualize our data: 
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{graphics/pca.pdf}
+\caption{Visualizing our scRNA-seq data with PCA.}
+\label{fig:marginfig}
+\end{marginfigure}
+<<eval = FALSE>>=
+
+#plot PCA results with Ig status
+ggplot(plot_pc_data, aes(x=geo.pca[["x"]][,'PC1'],
+    y=geo.pca[["x"]][,'PC2'], color=Ig_max)) + 
+    geom_point(shape=1) + theme_minimal() +   
+    geom_point(aes(color = Ig_max)) +  
+    theme(legend.position = "top")
+@
+
+
+
+\noindent Do IgA cells and IgG cells separate well using PCA?  Could we use other principal components?  
+
+\newthought{t-distributed stochastic neighbor embedding (t-SNE)} is a widely used nonlinear dimensionality reduction algorithm. \marginnote{\textbf{t-SNE} is a nonlinear dimensionality reduction method, which seeks to preserve the local structure of data in high-dimensional space when projected into low-dimensional space.} Unlike PCA, which seeks to capture variance in data, t-SNE seeks to explicitly preserve the local structure of the original data. t-SNE constructs a probability distribution to describe the data set such that pairs of similar cells are assigned a high probability, while dissimilar pairs are assigned a much smaller probability. Thus, cells that are similar in the high-dimensional space will cluster together (due to high probability) in low-dimensional space. This ability to explicitly maintain clustering of similar cells is an advantage of t-SNE over direct linear transformation such as PCA. This approach is very effective with scRNA-seq data, and has been used to resolve transcriptionally distinct populations that are indistinguishable with PCA.  We will need to use some functions from \docenvdef{Rtsne}, so let's load the R package:
+
+<<eval = FALSE>>=
+library("Rtsne")
+@
+\noindent If you get an error message saying there is no package titled \docenvdef{Rtsne} you may need to first install the package. 
+
+<<eval = FALSE>>=
+# Let's use the top 10 PC for t-SNE
+geo.tsne <- Rtsne(geo.hvg, theta = .001, 
+	perplexity = 30, initial_dims = 10)
+plot_tsne_data <- data.frame(
+    tsne1=geo.tsne$Y[,1], 
+    tsne2=geo.tsne$Y[,2])
+@
+
+\noindent Let's visualize our data: 
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{graphics/tsne.pdf}
+\caption{Visualizing our scRNA-seq data with t-SNE.}
+\label{fig:marginfig}
+\end{marginfigure}
+
+<<eval = FALSE>>=
+#plot tsne results with Ig status
+ggplot(plot_tsne_data, aes(x=geo.tsne$Y[,1],
+    y=geo.tsne$Y[,2], color=Ig_max)) + 
+    geom_point(shape=1) + theme_minimal() +   
+    geom_point(aes(color = Ig_max)) +  
+    theme(legend.position = "top")
+@
+
+\noindent Do IgA cells and IgG cells separate well using t-SNE?  
+
+\subsection{Exercise 1.2 --- Results discussion}
+What does separability mean? What is "good" separability? Does it matter? How could we perform clustering on our visualizations?  What would that tell us about the population structure of cells in the data?  What might happen if we keep IgA and IgG as our cell labels but we remove expression information for all the underlying Ig genes and then visualize the data?
+
+
+\subsection{\textbf{Conclusion}}
+While single cell transcriptional profiles have high dimensionality due to the thousands of genes profiled, their intrinsic dimensionalities are typically much lower. Thus, unsupervised low dimensional projections can reveal salient  structure in scRNA-seq datasets.  However, the choice of dimensionality reduction algorithms used for visualization needs careful thought in immunology. 
+
+
+\section{\textbf{2. Peptide-MHC interactions}} 
+Nearly every cell in our body is decorated with a class of molecules known as major histocompatibility complex (MHC). The function of the MHC is to bind peptide fragments (antigens) derived from pathogens and display them on the cell surface for recognition by components of the immune system. In particular, alien peptides may be recognized by cytotoxic T cells, which can destroy infected cells.  Understanding the binding affinity of MHC proteins and the repertoire of cognate peptide ligands is important for advancing our understanding of the antigenic landscape in infectious diseases, autoimmunity, vaccine design, and cancer immunotherapy.
+\begin{figure}
+\includegraphics{graphics/HLA.pdf}
+\caption{
+Structure of a peptide-MHC complex. (A) Front view of the crystal structure 1I4F depicting a space-filled molecular surface representation of the MHC (HLA-A*02:01) protein bound with a peptide (derived from MAGEA4, in purple), and (B) a backbone ribbon representation of the MHC. The heavy chain of MHC (alpha), which contains the binding cleft, is depicted in green. The supporting light chain (Beta-2 Microglobulin) is depicted in brown. (C,D)  Top view of the complex showing the surface of the MHC (green) and the exposed surface of the bound peptide (purple).  The exposed part of the peptide is referred to as the ``TCR-interacting surface” of the peptide-MHC complex. }\label{fig:textfig}
+\end{figure}
+
+
+
+Due to the importance of this process, peptide-MHC binding has been experimentally studied in a variety of ways. For example, the relative binding ability of different peptides to a specific MHC molecule can be directly assessed by competition experiments. The result of such experiments is a set of relative binding energies for different MHC-peptide combinations. In this section, we will model the repertoire of peptide ligands associated with a specific MHC molecule.
+
+
+\subsection{\textbf{Exercise 2.1}}
+
+\subsection{Exercise 2.1 --- Overview discussion}
+Our goal for this exercise is to load some HLA-peptide sequence and binding affinity data. If you are new to analyzing sequence data (or string data structures), let's take a moment to consider how this data structure differs from numerical data structures, and what are some operations we might want to perform on biological strings, such as sequence alignment.  We can also review concepts such as edit distance and k-mers.
+
+\subsection{Exercise 2.1 --- Data wrangling}
+\marginnote{\textbf{IEDB} is a public database of immune epitope information.  The database contains data related to antibody and T cell epitopes for humans, non-human primates, rodents, and other animal species. In particular, the database contains extensive MHC class I binding data from a variety of different antigenic sources.} High-throughout screening through competition experiments have resulted in large datasets cataloging binding affinities between various MHC molecules and peptides. Let's begin by downloading some peptide-MHC binding data. For this exercise we will be using data from the The Immune Epitope Database (IEDB) \url{http://tools.iedb.org/mhci/download/} 
+
+
+
+\begin{figure}
+\includegraphics{graphics/iedb.pdf}
+\caption[Supplementary data][6pt]{The binding data is available in the MHC class I section at the top (binding\_data\_2013.zip).  }
+\label{fig:textfig}
+\end{figure}
+
+\noindent Let's download: \textcolor{blue}{\docclsopt{binding\_data\_2013.zip}}
+
+\noindent Once the peptide-MHC binding data is downloaded, you can uncompress the file.  The resulting tab-delimited file contains nearly 200,000 peptide-MHC combinations. Let's load the data using R:
+
+<<eval = FALSE>>=
+# load data
+iedb <- read.csv('./bdata.20130222.mhci.txt', 
+    header = TRUE, sep = "\t", as.is =TRUE)
+
+# let's use head to view a snippet of the data
+head(iedb) 
+@
+
+
+\noindent You should see the first few lines of the file, including the header for the columns.  Let's take a moment to interpret what the values mean for each of the columns:
+
+\begin{description}
+\item[\docclsopt{species}] This is the species from which a specific MHC allele was evaluated for peptide binding.
+\item[\docclsopt{mhc}] This is the specific MHC allele.
+\item[\docclsopt{peptide\_length}] MHC class I molecules bind peptides that are predominantly 8-10 amino acid in length.  Traditionally, there has been a focus on 9mer peptides when mapping HLA-I restricted T cell epitopes.
+\item[\docclsopt{sequence}] This is the sequence of the peptide.
+\item[\docclsopt{inequality}] This reflects the uncertainty for some of the peptide MHC binding data, where there some reported affinities are either an upper-bound or lower-bound to the true binding affinity.
+\item[\docclsopt{meas}] The predicted output is given in units of IC50 nM. Therefore a lower number indicates higher affinity. As a rough guideline, peptides with IC50 values $<$50 nM are considered high affinity.
+\end{description}
+
+\subsection{Exercise 2.1 --- Results discussion}
+
+\newthought{Why is this interesting?} Several T-cell based cancer immunotherapies are being engineered to drive anti-tumor immune responses for specific antigens presented by the human MHC allele HLA-A*02:01. In cancer, somatic mutations altering the amino acid sequence of endogenous protein coding genes can result in the generation of tumor-specific HLA-presented antigenic peptide epitopes (or neo-antigens). These neo-antigens have the potential to activate cytotoxic T lymphocytes (e.g. CD8+ T cells) of the host immune system through HLA class I molecules, thereby provoking an anti-tumor immune response.  
+
+It stands to reason that if we knew the binding specificity of a given MHC, we could evaluate different somatic mutations in a cancer sample and determine if it could be presented by the cancer. Given the data available, can we model the repertoire of high affinity peptides that are presented by the human HLA-A*02:01 allele? 
+
+\subsection{Exercise 2.2 --- Overview discussion}
+Our goal for this exercise is to infer the pattern of amino acid specificity in high affinity peptides for a specific HLA.  In other words, what positions and letters show a bias or preference for binding HLA-A*02:01?  Let's assume each position of a peptide binds independently to the HLA molecule, how could we use intuition from statistics to approach this question?  What are the possible letters or alphabet used in the peptides?  How can we calculate what are the observed frequencies for a given position?
+
+
+\subsection{Exercise 2.2 --- Data Visualization}
+
+\noindent One way to visualize the repertoire of high affinity peptides that can bind to HLA-A*02:01 is to use a sequence logo plot. First, the relative frequency of each amino acid at each position is calculated. This can be referred to as a positional weight matrix (PWM). \marginnote{A \textbf{PWM} is a type of scoring matrix in which amino acid substitution scores are inferred separately for each position from a collection of aligned protein sequences.} Second, the logo plot depicts the relative frequency of each character by stacking characters on top of each other, with the height of each character proportional to its relative frequency. The total height of the letters depicts the information content of the position, in bits. Here, we will use an R package called \docenvdef{ggseqlogo} to calculate the position specific frequencies for all high affinity 9mer peptides and visualize the sequence logo.  
+
+\marginnote{Notably, the Matthew Stephens Lab at UChicago has also developed a sequence logo tool called \docenvdef{Logolas}. }
+
+
+<<eval = FALSE>>=
+# First let's install a seqlogo tool
+install.packages("ggseqlogo")
+library(ggseqlogo)
+
+# You can also install Logolas
+# BiocManager::install("Logolas")
+# library(Logolas)
+@
+
+
+\noindent Let's select peptides from our HLA of interest:
+
+
+<<eval = FALSE>>=
+
+# let's select human,  'HLA-A*02:01', 
+# peptides of length 9 
+# and binding affinity < 50
+filtered_iedb = subset(iedb, species=='human' 
+    & mhc=='HLA-A*02:01' 
+    & meas < 50 
+    & peptide_length == 9)
+    
+@
+
+
+\noindent Next, let's try to model the distribution in a position specific manner: 
+
+<<eval = FALSE>>=
+# let's grab the peptide sequences
+listOfSequences = filtered_iedb[,4]
+
+# number of sequences
+numSequences = length(listOfSequences)
+  
+# length of each sequence
+lengthOfSequence = nchar(listOfSequences[1])
+  
+# find unique characters in list of sequences
+aminoAcidsVocab = unique(strsplit(
+    paste(listOfSequences, collapse = ''), 
+    "")[[1]]) 
+  
+# create empty PFM matrix of zeros with dimensions 
+# of 20 x length of each sequence
+PFM = matrix(0L, length(aminoAcidsVocab), 
+    lengthOfSequence)
+  
+# for loop through each sequence
+for (sequence in listOfSequences) {
+    
+  # transform character vector to vector of
+  # single characters # for looping
+  sequenceString = strsplit(sequence, "")[[1]]
+    
+  # for loop through each amino acid in sequence
+  for (index in seq_along(sequenceString)) {
+      
+    # increment value at PFM[amino acid 
+    # at position, positon]
+    PFM[match(sequenceString[index], 
+        aminoAcidsVocab), index] = 
+    PFM[match(sequenceString[index], 
+        aminoAcidsVocab), index] + 1
+    }
+  }
+
+# give rownames with amino acid letter
+rownames(PFM) = aminoAcidsVocab
+ 
+@
+
+
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{graphics/motif.pdf}
+\caption{Sequence logo of high affinity peptides for HLA-A*02:01.}
+\label{fig:marginfig}
+\end{marginfigure}
+
+
+\noindent Let's pass the list of 9mers to \docenvdef{ggseqlogo} to visualize sequence logo:
+
+<<eval = FALSE>>=
+ggseqlogo(peptide_sequences, seq_type='aa',
+    as.is =TRUE)
+@
+
+\subsection{Exercise 2.2 --- Results discussion}
+What positions of the high affinity peptides to seem to be highly specific for binding HLA-A*02:01?  Let's use \url{http://www.allelefrequencies.net} to identify other HLA types. How does this compare with high affinity binding specificities of other HLA, such as HLA-C*06:02. What are the implications for minority populations?
+
+
+\subsection{\textbf{Conclusion}}
+Although we have made tremendous progress in modelling peptide-MHC interactions over the past several decades, connecting which T cells interact with which MHC-bound antigens remains a challenge.  An efficent solution to this problem would have broad applications in improving our understanding of T cells in health, autoimmunity, and cancer (and potentially a free trip to Sweden). This remains a challenging task, in part, due to the enormous number of potential T cell receptors, the diversity of the MHC and bound antigen peptides. However, new computational methods may help resolve TCR-pMHC interactions by integrating and learning complex patterns from diverse high-throughput experimental approaches.
+
+
+\begin{figure}
+\includegraphics{graphics/final.pdf}
+\caption{MHC class I overview (Rock, Kenneth L., Eric Reits, and Jacques Neefjes. "Present yourself! By MHC class I and MHC class II molecules." Trends in Immunology 37.11 (2016): 724-737.) \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5159193/figure/F1/}
+}
+\end{figure}
+
+
+
+\end{document}
