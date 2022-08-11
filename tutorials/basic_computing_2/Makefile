@@ -2,7 +2,7 @@
 
 # RULES
 # -----
-all: handout handout_snippets.pdf handout_fujita.pdf
+all: handout handout_snippets.pdf
 
 handout: basic_computing_2.pdf
 
@@ -12,11 +12,6 @@ basic_computing_2.pdf : basic_computing_2.Rmd
 handout_snippets.pdf : handout_snippets.Rmd
 	Rscript -e 'rmarkdown::render("handout_snippets.Rmd",output_file="handout_snippets.pdf")'
 
-handout_fujita.pdf : handout_fujita.Rmd tornadoes_1974.R
-	Rscript -e 'rmarkdown::render("handout_fujita.Rmd",output_file="handout_fujita.pdf")'
-
 clean:
 	rm -f basic_computing_2.pdf
 	rm -f handout_snippets.pdf
-	rm -f handout_fujita.pdf
-

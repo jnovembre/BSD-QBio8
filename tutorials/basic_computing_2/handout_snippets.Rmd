@@ -1,5 +1,5 @@
 ---
-title: "Basic Computing 2 in-class activity --- code snippets and creating functions"
+title: "Basic Computing 2 activity --- code snippets and creating functions"
 output:
   pdf_document:
     keep_tex: false
@@ -8,7 +8,7 @@ output:
 author:
   name: Peter Carbonetto
   affiliation: University of Chicago
-date: September 1, 2021
+date: July 26, 2022
 geometry: margin=1in
 fontfamily: mathpazo
 fontsize: 11pt
@@ -18,7 +18,7 @@ endnote: no
 header-includes:
   - \usepackage[T1]{fontenc}
   - \usepackage{textcomp}
-thanks: "This document is included as part of the Basic Computing 2---Introduction to R tutorial packet for the BSD qBio Bootcamp, University of Chicago, 2021. **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: pcarbo@uchicago.edu. Thanks to Katie Aracena, Arjun Biddanda, John Blischak, Jennifer Blanc, Maryn Carlson, Grace Hansen and Suraj (Neil) Sheth for providing code examples."
+thanks: "This document is included as part of the Basic Computing 2---Introduction to R tutorial packet for the BSD qBio Bootcamp, University of Chicago, 2022. **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: pcarbo@uchicago.edu. Thanks to Katie Aracena, Arjun Biddanda, John Blischak, Jennifer Blanc, Maryn Carlson, Grace Hansen and Suraj (Neil) Sheth for providing code examples."
 abstract: "In this activity, will examine short code examples ('code
   snippets') that current and former BSD graduate students have used in
   their research. Our primary aim is to rework these code snippets as

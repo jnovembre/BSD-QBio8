@@ -1,14 +1,14 @@
 ---
-title: "Basic Computing 2 --- Packages, functions and better code"
+title: "Basic Computing 2 --- Introduction to R, Part 2"
 output:
   pdf_document:
     keep_tex: false
     latex_engine: pdflatex
     template: readable.tex
 author:
-  name: Stefano Allesina and Peter Carbonetto
+  name: Peter Carbonetto and Aarti Venkat
   affiliation: University of Chicago
-date: August 25, 2021
+date: July 26, 2022
 chapter: 2
 geometry: margin=1in
 fontfamily: mathpazo
@@ -19,13 +19,14 @@ endnote: no
 header-includes:
   - \usepackage[T1]{fontenc}
   - \usepackage{textcomp}
-thanks: "This document is included as part of the Basic Computing 2---Introduction to R tutorial packet for the BSD qBio Bootcamp, University of Chicago, 2021. **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: pcarbo@uchicago.edu. Thanks to John Novembre, Stephanie Palmer and Matthew Stephens for their guidance."
-abstract: "The aims of this workshop are to: (1) learn how to install,
-  load and use the many of the freely available `R` packages; (2)
-  illustrate how to write user-defined functions, and how to organize
-  and improve your code; use basic plotting functions; and (3)
-  introduce the package `knitr` for writing beautiful reports. *This
-  workshop is intended for biologists with basic knowledge of `R`.*"
+thanks: "This document is included as part of the Basic Computing 2---Introduction to R tutorial packet for the BSD qBio Bootcamp, University of Chicago, 2022. **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: pcarbo@uchicago.edu. Thanks to Stefano Allesina, John Novembre, Stephanie Palmer and Matthew Stephens for their guidance."
+abstract: "Like Part 1, in Part 2 we will continue learning R by
+analyzing tabular data---that is, a *data frame*---but in Part 2 the
+table is much larger. Some of the skills we learned in Part 1 will
+transfer to this large-scale data setting. But we will also have to
+learn some new skills and practices to be able to cope with
+larger and more complex data. In Part 2, we will also sharpen our practices
+to prepare ourselves for analyzing data in the Real World."
 ---
 
 ```{r knitr-opts, include=FALSE}
@@ -33,65 +34,471 @@ knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hide",
                       fig.keep = "none")
 ```
 
-Setup
-=====
+The Tornado Super Outbreak of 1974
+==================================
 
-To follow the examples below, you will first need to install the
-**knitr** and **readr** packages. You will also use the **MASS**
-package (this package is already included with `R`), and **ggplot2**
-for the in-class activities.
+From *University of Chicago Magazine*, Fall, 2020:
 
-In-class activities: Exploring simple steps for more effective code
-===================================================================
+> Fujita published his proposed tornado scale in 1971, but it needed a
+> high-profile event to take root. On April 3, 1974, a tornado touched
+> down in Morris, Illinois, around noon. Over the next 17 hours, 148
+> confirmed tornadoes tore through 13 states and Ontario,
+> Canada. Following the 1974 Super Outbreak—one of the worst tornado
+> outbreaks on record—Fujita and his team took a whirlwind airplane
+> tour of more than 10,000 miles, surveying the ruins.
+
+Fujita's scale is now known the "F-scale", and it scores tornadoes
+from F0 to F5 based on wind speeds and ensuing damage.
+
+Analysis aims
+-------------
+
+Our main analysis aim is to uncover evidence for the 1974 Tornado
+Super Outbreak in data from NOAA's Severe Weather Data Inventory
+(SWDI). We will also perform a *comparative analysis* of these data to
+better understand the importance of this Super Outbreak in tornado
+climatology.
+
+Do I have what I need?
+----------------------
+
+From GitHub, download the tutorial materials to your computer, and
+make sure you know where to find them.
+
+Obviously, you will need R, and, optionally, RStudio. Also, you will
+need the **ggplot2** and **cowplot** packages. If you haven't already
+done so, go ahead and install these two packages.
+
+Where am I?
+-----------
+
+Make sure your R working directory in is the same directory containing
+the tutorial materials; you can run `getwd()` and `list.files()` to
+check this.
+
+Quit applications that are not needed and other "clutter" to reduce
+distractions. *Remember, the computer is device of distraction.*
+
+Also, it is best if you start with a fresh workspace; you can refresh
+your environment by selecting **Session > Clear Workspace** from the
+RStudio menu. 
+
+Initial steps to explore the SWDI data
+--------------------------------------
+
+Here we will reuse some of the skills we learned in Part 1 to get a
+basic understanding of the SWDI data.
+
+Since the SWDI data are stored as a CSV file, you should now know what
+to do to import the data into R:
+
+```{r read-data}
+storms <- read.csv("StormEvents_details-ftp_v1.0_d1974_c20220425.csv.gz",
+                   stringsAsFactors = FALSE)
+```
+
+Let's run a few lines of code to get an overview of the data frame:
+
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][4em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r inspect-data-1, echo=FALSE}
+nrow(storms)
+ncol(storms)
+colnames(storms)
+```
+
+In our search for the Tornado Super Outbreak, we will use these seven
+columns: EVENT_TYPE, BEGIN_DAY, MONTH_NAME, STATE, BEGIN_LON,
+BEGIN_LAT and TOR_F_SCALE. Let's look more closely at these columns:
+
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][12em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r inspect-data-2, echo=FALSE}
+table(storms$EVENT_TYPE)
+summary(storms$BEGIN_DAY)
+table(storms$MONTH_NAME)
+plot(table(storms$MONTH_NAME))
+table(storms$STATE)
+summary(storms$BEGIN_LON)
+summary(storms$BEGIN_LAT)
+table(storms$TOR_F_SCALE)
+```
+
+$$
+\athaliana
+$$
+
+Preparing the tornado data
+--------------------------
+
+Our initial examinations suggest a few improvements to the data
+frame. *What are the improvements should we make?*
+
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][6em]{2in}
+\faPencil \rule{0pt}{1em} 
+\small\sf\em Write your notes here.
+\end{minipage}}
+$$
+
+Now let's make these improvements:
+
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][10em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r fix-data, echo=FALSE}
+storms$EVENT_TYPE <- factor(storms$EVENT_TYPE)
+storms$STATE <- factor(storms$STATE)
+storms$MONTH_NAME <- factor(storms$MONTH_NAME,month.name)
+rows <- which(storms$TOR_F_SCALE == "")
+storms[rows,"TOR_F_SCALE"] <- NA
+storms$TOR_F_SCALE <- factor(storms$TOR_F_SCALE)
+```
+
+Since our focus is a particular type of storm event—tornadoes—let's
+extract the rows of the table that are relevant to our analysis.
+
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][4em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r extract-data, echo=FALSE}
+rows <- which(storms$EVENT_TYPE == "Tornado")
+tornadoes <- storms[rows,]
+nrow(storms)
+nrow(tornadoes)
+```
+
+$$
+\mouse
+$$
+
+Keeping track of what we have done
+----------------------------------
+
+Although we haven't made any breakthroughs yet, we have nonetheless
+made some progress: we have gained some basic insight into the data,
+and we have carefully prepared the data for our subsequent
+analyses. This is a good time to create a *script*---that is, the
+lines of code that reproduce the steps of our analysis. A script acts
+as both *a record of what we have done* and should, ideally, be
+*self-contained* so that it allow us to quickly *automate the
+analysis*.
+
+Let's write a *minimal script* that reproduces the two most essential
+steps: (1) importing the data, and (2) prepping the data.
+
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][12em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+**Exercise:** Check that your script is *reproducible* by running your
+script after clearing your workspace.
+
+```{r script, echo=FALSE}
+storms <- read.csv("StormEvents_details-ftp_v1.0_d1974_c20220425.csv.gz",
+                   stringsAsFactors = FALSE)
+storms$EVENT_TYPE <- factor(storms$EVENT_TYPE)
+storms$STATE <- factor(storms$STATE)
+storms$MONTH_NAME <- factor(storms$MONTH_NAME,month.name)
+rows <- which(storms$TOR_F_SCALE == "")
+storms[rows,"TOR_F_SCALE"] <- NA
+storms$TOR_F_SCALE <- factor(storms$TOR_F_SCALE)
+rows <- which(storms$EVENT_TYPE == "Tornado")
+tornadoes <- storms[rows,]
+```
+
+*What are some reasons for writing a script?*
+
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][6em]{2in}
+\faPencil \rule{0pt}{1em} 
+\small\sf\em Write your notes here.
+\end{minipage}}
+$$
+
+Now that we have extracted and prepared the data, we are now ready to
+dive more deeply into these data. We will proceed by writing code to
+answer some questions.
+
+*When* did the tornadoes occur?
+-------------------------------
+
+Write your code to answer this question:
+
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][8em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r analysis-1, echo=FALSE}
+table(tornadoes$MONTH_NAME)
+plot(table(tornadoes$MONTH_NAME))
+# Let's look in more detail at *when* these tornadoes occurred.
+# d <- paste(1974,
+#            as.numeric(tornadoes$MONTH_NAME),
+#            tornadoes$BEGIN_DAY,sep = "-")
+# d <- as.Date(d)
+# tornadoes$DATE <- d
+# tornadoes$dayofyear <- as.numeric(format(tornadoes$DATE,"%j"))
+tornadoes$dayofyear <- paste(as.numeric(tornadoes$MONTH_NAME),
+                             tornadoes$BEGIN_DAY,sep = "-")
+plot(table(tornadoes$dayofyear))
+```
+
+*Where* did the tornadoes occur?
+--------------------------------
+
+Write your code to answer this question. To help you with this, I have
+written a *custom function* that takes a data frame "latlongs" as
+input and outputs a map of the US with the geographic locations
+projected onto it:
+
+```{r map-usa-latlongs}
+# Creates a map of the United States overlaid with points given by
+# their geographic co-ordinates (lats and longs).
+# The inputs are two numeric vectors of the same length.
+# The output is a ggplot object.
+map_usa_latlongs <- function (lats, longs) {
+  dat <- data.frame(lat = lats,long = longs)
+  return(ggplot(dat,aes(x = long,y = lat)) +
+         geom_path(data = map_data("state"),
+                   aes(x = long,y = lat,group = group),
+                   color = "gray") +
+         geom_point(shape = 20,size = 1) +
+     	 theme_classic())
+}
+```
+  
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][6em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r analysis-2, echo=FALSE}
+table(tornadoes$STATE)
+sort(table(tornadoes$STATE))
+plot(tornadoes$BEGIN_LON,tornadoes$BEGIN_LAT,pch = 20)
+library(ggplot2)
+map_usa_latlongs(tornadoes$BEGIN_LAT,tornadoes$BEGIN_LON)
+```
+
+What are the outliers?
+----------------------
+
+Plotting the tornadoes by geographic location revealed some
+"outliers". Write some code to track down these outliers in the table,
+then remove them from the table:
+
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][4em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r analysis-3, echo=FALSE}
+rows <- which(tornadoes$BEGIN_LON < -140 |
+              tornadoes$BEGIN_LAT < 25)
+tornadoes[rows,]
+tornadoes <- tornadoes[-rows,]
+map_usa_latlongs(tornadoes$BEGIN_LAT,tornadoes$BEGIN_LON)
+```
+
+Exercise: Mapping the Super Outbreak
+------------------------------------
+
+Create a map of the tornadoes again, this time focussed on the
+tornadoes that occurred on the single day of the tornado Super
+Outbreak. *You may be able to reuse the* `map_usa_latlongs` *custom
+function to answer this question.*
+
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][4em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r analysis-4, echo=FALSE}
+rows <- which(tornadoes$dayofyear == "4-3")
+map_usa_latlongs(tornadoes[rows,"BEGIN_LAT"],tornadoes[rows,"BEGIN_LON"])
+```
+
+Compare your map to
+[`https://en.wikipedia.org/wiki/1974_Super_Outbreak`](https://en.wikipedia.org/wiki/1974_Super_Outbreak).
+
+Activity: How unusual was the 1974 Tornado Super Outbreak?
+==========================================================
+
+Using our R skills, and the data provided by the NOAA, we recreated a
+detailed picture of the 1974 Tornado Super Outbreak---the same events
+that were carefully studied by Fujita and his colleagues.
+
+Uncovering an exciting result---whether it is expected or
+surprising---is often only the beginning of your research. Typically,
+more analyses will need be done to confirm your result. This may
+involve collecting more data, or refining your analyses, or both.
+
+As mentioned, creating *scripts* is an important element of your data
+analysis practice.
+
+Here, we expand on this idea and develop a more flexible *generic
+script* that can be quickly reused to perform multiple analyses. As we
+develop more complex analyses, another important skill is knowing
+*when*---and *how*---to *reuse code*.
+
+A natural question is whether there was something special about
+1974. Are these "bursts" of tornadoes common, or exceedingly rare?
+To answer this question, we would need to download and analyze the
+storm event data from many years, not just 1974. Suddenly our
+large-scale data analysis has gotten even larger.
+
+**This is your task.** Create a more flexible script that automates
+all the steps of the analysis: (1) load the data, (2) prepare the
+data, (3) extract the tornado data, and (4) create a plot showing
+number of tornadoes by date. This is mostly the same as what we did
+before, *but with a twist*: this new script is more flexible because
+it can analyze tornado event data from *any year*, not just 1974. To
+do this, define a new variable "year" and use this variable in your
+script to modify the analysis according to the target year.
+
+*Hint:* You should be able to write this script by adapting the code
+we have written above. The function `paste` or `paste0` may also be
+useful.
+
+The git repository includes SWDI data from 1974, 1975 and 1976 which
+you can use to test your script.
+
+*Optional:* Download more storm event data from the NOAA SWDI database
+and try running your script on those data.
+
+*Discuss:* Does this script achieve our goal of comparing tornado
+patterns across different years? What are ways in which this
+comparison could be improved?
+
+*Challenge problem:* Use a "for loop" to automate your
+analysis---including the step to download the CSV files from the SWDI
+database---for all years from 1974 to 2020.
+
+```{r analyze-tornado-data, echo=FALSE, eval=FALSE}
+layout(matrix(1:4,2,2))
+par(mar = c(3,3,3,3))
+year <- 1974; source("analyze_tornado_data.R")
+year <- 1975; source("analyze_tornado_data.R")
+year <- 1976; source("analyze_tornado_data.R")
+```
+
+A few closing remarks
+=====================
 
 You will often find that it isn't long into a data
 analysis---sometimes after writing as little as 10--20 lines of
-code---when you encounter problems with your code. Many problems can
-be avoided with Good Practices. Examples of Good Practices include:
+code---when you run into problems. Some of these problems can be
+avoided with Good Practices. Examples of Good Practices include:
 
-1. Writing your code so that it is self-contained---that is, it
-   includes all the steps needed to re-run the analysis.
+1. Keeping track of what you have done in *self-contained scripts.*
 
-2. Writing the steps in a logical order.
+2. Giving names to variables that help you remember what they are for.
 
-3. Using variable names that are helpful.
+3. Including short, high-level comments explaining what the code does.
 
-4. Including short, high-level comments that explain what the code
-   does.
+(How well did follow these practices in the examples above?)
 
-One particularly common frustration arises from fiddling with your
-code, re-running it to produce a new result, then repeating this
-"revise-and-rerun" loop. In addition to being tedious, you will also
-find that this revise-and-rerun loop will make it difficult to keep
-track of which code produced the most interesting result.
-
-We will explore some *simple but effective steps* for avoiding this
-frustration. One powerful idea is to identify the most useful bit
-of code, then package this bit of code into a *function* that can be
-quickly reused. This can not only help to streamline the analysis, but
-also reduce the potential for mistakes, particularly when the analysis
-involves complex calculations.
-
-In the first activity, we will examine short code examples ("code
-snippets") that current and former BSD graduate students have used in
-their research. Our aim will be to rework these code snippets as
-functions that they can be easily reused in our R data analyses.
-
-In the second activity, we will re-examine data from University of
-Chicago Professor Tetsuya Fujita's influential study of the 1974
-"Jumbo tornado outbreak." Our aim will be to apply the practices we
-learned in the first activity toward a more complex analysis, then
-efficiently repeat the same complex calculations across multiple data
-sets.
-
-*Additional details about these activities will be given in class.*
+One powerful idea is to identify a useful bit of code, then package
+this bit of code into a *function* that can be quickly reused.
 
 $$
-\zebrafish
+\ecoli
 $$
 
-A brief tour of packages, functions, loops, and other topics
-============================================================
+Programming challenge
+=====================
+
+Instructions
+------------
+
+You will work with your group to solve the exercises below. When you
+have found the solutions, go to 
+[`https://jnovembre.github.io/BSD-QBio8`](https://jnovembre.github.io/BSD-QBio8)
+and follow the link "Submit solution to challenge 2" to submit your
+answer.
+
+Google Flu Trends
+-----------------
+
+Google Flu started strong, with a paper in *Nature* (Ginsberg *et al*,
+2009, [`doi:10.1038/nature07634`][ginsberg-2009]) showing that, using
+data on Web search engine queries, one could predict the number of
+physician visits for influenza-like symptoms.  Over time, the quality
+of predictions degraded considerably, requiring many adjustments to
+the model. Now defunct, Google Flu Trends has been proposed as a
+poster child of "Big Data hubris" (Lanzer *et al*, *Science*, 2014,
+[`doi:10.1126/science.1248506`][lanzer-2014]).  In the folder containing
+the Basic Computing 2 tutorial materials, you will find the data used
+by Preis and Moat in their 2014 paper
+([`doi:10.1098/rsos.140095`][preis-moat-2014]) to show that, after
+accounting for some additional historical data, Google Flu Trends are
+correlated with outpatient visits due to influenza-like illnesses.
+
+1. Read the data using function `read.csv` and plot the number of
+   weekly outpatient visits versus the Google Flu Trends estimates.
+
+2. Calculate the (Pearson's) correlation using the `cor` function.
+
+3. The data span 2010--2013. In August 2013, Google Flu changed their
+   algorithm. Did this lead to improvements? Compare the data from
+   weeks starting in August and September 2013 with the data from
+   weeks starting in August and September 2010, 2011 and 2012. For
+   each, calculate the correlation, and see whether the correlation is
+   higher for 2013.
+
+**Hint:** You will need to extract the year from a string for each
+row. There are several ways to do this, but one simple way is using
+`substr(gf$WeekCommencing,1,4)`, in which `gf` is the data frame
+containing the Google Flu data.
+
+$$
+\butterfly
+$$
+
+Other topics
+============
 
 Packages
 --------
@@ -179,7 +586,7 @@ head(bacteria)
 ```
 
 $$
-\squid
+\nematode
 $$
 
 Random numbers
@@ -306,7 +713,7 @@ your environment (unless you happen to already have an object named
 `y`).
 
 $$
-\athaliana
+\squid
 $$
 
 Vectorization
@@ -326,11 +733,11 @@ print(y)
 plot(x, y, type = "l")
 ```
 
-**Activity (optional):** Which operations in `normpdf` were applied
-1,000 times, and which were applied just once? It may not be
-immediately obvious just by looking at the code, so to investigate
-this question, try running parts of the code in the console, e.g.,
-`exp(-(x/s)^2/2)`, and see what happens.
+**Activity:** Which operations in `normpdf` were applied 1,000 times,
+and which were applied just once? It may not be immediately obvious
+just by looking at the code, so to investigate this question, try
+running parts of the code in the console, e.g., `exp(-(x/s)^2/2)`, and
+see what happens.
 
 Vectorization is very powerful, but it may take time to get
 comfortable with it, and know when it will work.
@@ -368,6 +775,10 @@ print(msg)
 We have created a conditional branching point, so that the value of
 `msg` changes depending on whether `x` is less than zero, greater
 than zero, or equal to zero. 
+
+$$
+\zebrafish
+$$
 
 Activity: Improved normal probability density function
 ------------------------------------------------------
@@ -440,6 +851,10 @@ solvequad(1, 1, 1)    # Should return no solutions.
 ```
 
 Run a few more tests using [`www.wolframalpha.com`][wolfram-alpha].
+
+$$
+\fruitfly
+$$
 
 Looping
 -------
@@ -521,12 +936,109 @@ while (TRUE) {
 **Question:** Above, we ran three different loops, we found that each
 of them accomplished the same thing. Is one approach better? Why?
 
+Creating computational notebooks using R Markdown
+-------------------------------------------------
+
+> *Let us change our traditional attitude to the construction of
+> programs: instead of imagining that our main task is to instruct a
+> computer what to do, let us concentrate rather on explaining to
+> humans what we want the computer to do.*
+>
+> Donald E. Knuth, *Literate Programming*, 1984
+
+When doing experiments, it is important to develop the habit of
+writing down everything you do in a laboratory notebook. That way,
+when writing your manuscript, responding to queries or discussing
+progress with your advisor, you can go back to your notes to find
+exactly what you did, how you did it, and possibly *why* you did
+it. The same should be true for computational work.
+
+`RStudio` makes it very easy to build a computational laboratory
+notebook. First, create a new `R Markdown` file. (Choose **File > New
+File > R Markdown** from the RStudio menu bar.)
+
+An R Markdown file is simply a text file. But it is interpreted in a
+special way that allows the text to be transformed it into a webpage
+(`.html`) or PDF file. You can use special syntax to render the text
+in different ways. Here are a few examples of R Markdown syntax:
+
+```
+*Italic text* **Bold text**
+
+# Very large header
+
+## Large header
+
+### Smaller header
+
+Unordered and ordered lists:
+
++ First
++ Second
+    + Second 1
+    + Second 2
+
+1. This is a
+2. Numbered list
+```
+
+When rendered as a PDF, the above R Markdown looks like this:
+
+# Very large header
+
+## Large header
+
+### Smaller header
+
+*Italic text* **Bold text**
+
+Unordered and ordered lists:
+
++ First
++ Second
+    + Second 1
+    + Second 2
+
+1. This is a
+2. Numbered list
+
+You can also insert inline code by enclosing it in backticks.
+
+The most important feature of R Markdown is that you can include
+blocks of code, and they will be interpreted and executed by `R`. You
+can therefore combine effectively the code itself with the description
+of what you are doing.
+
+For example, including a code chunk in your R Markdown file,
+
 $$
-\fruitfly
+\includegraphics[width=1.85in]{helloworld.png}
 $$
 
-Case study: Do shorter titles lead to more citations?
-=====================================================
+will render a document containing both the results and the code that
+run to generate those results:
+
+```{r hello-world, results="show"}
+cat("Hello world!")
+```
+
+If you don't want to run the `R` code, but just display it, use `{r
+hello-world, eval = FALSE}`; if you want to show the output but not
+the code, use `{r hello-world, echo = FALSE}`.
+
+You can include plots, tables, and even mathematical equations using
+LaTeX. In summary, when exploring your data, or describing the methods
+for your paper, give R Markdown a try!
+
+You can find inspiration in this Boot Camp; the materials for Basic
+and Advanced Computing were written in R Markdown.
+
+$$
+\macaque
+$$
+
+Bonus case study: Do shorter titles lead to more citations?
+===========================================================
 
 To keep learning about `R`, we study the following question:
 
@@ -995,155 +1507,6 @@ for (i in files) {
 on papers from the *American Journal of Human Genetics*. Would any
 changes need to be made to your R code above to run it on the four
 citation data sets?
-
-$$
-\mouse
-$$
-
-Creating computational notebooks using R Markdown
-=================================================
-
-> *Let us change our traditional attitude to the construction of
-> programs: instead of imagining that our main task is to instruct a
-> computer what to do, let us concentrate rather on explaining to
-> humans what we want the computer to do.*
->
-> Donald E. Knuth, *Literate Programming*, 1984
-
-When doing experiments, it is important to develop the habit of
-writing down everything you do in a laboratory notebook. That way,
-when writing your manuscript, responding to queries or discussing
-progress with your advisor, you can go back to your notes to find
-exactly what you did, how you did it, and possibly *why* you did
-it. The same should be true for computational work.
-
-`RStudio` makes it very easy to build a computational laboratory
-notebook. First, create a new `R Markdown` file. (Choose **File > New
-File > R Markdown** from the RStudio menu bar.)
-
-An R Markdown file is simply a text file. But it is interpreted in a
-special way that allows the text to be transformed it into a webpage
-(`.html`) or PDF file. You can use special syntax to render the text
-in different ways. Here are a few examples of R Markdown syntax:
-
-```
-*Italic text* **Bold text**
-
-# Very large header
-
-## Large header
-
-### Smaller header
-
-Unordered and ordered lists:
-
-+ First
-+ Second
-    + Second 1
-    + Second 2
-
-1. This is a
-2. Numbered list
-```
-
-When rendered as a PDF, the above R Markdown looks like this:
-
-# Very large header
-
-## Large header
-
-### Smaller header
-
-*Italic text* **Bold text**
-
-Unordered and ordered lists:
-
-+ First
-+ Second
-    + Second 1
-    + Second 2
-
-1. This is a
-2. Numbered list
-
-You can also insert inline code by enclosing it in backticks.
-
-The most important feature of R Markdown is that you can include
-blocks of code, and they will be interpreted and executed by `R`. You
-can therefore combine effectively the code itself with the description
-of what you are doing.
-
-For example, including a code chunk in your R Markdown file,
-
-$$
-\includegraphics[width=1.85in]{helloworld.png}
-$$
-
-will render a document containing both the results and the code that
-run to generate those results:
-
-```{r hello-world, results="show"}
-cat("Hello world!")
-```
-
-If you don't want to run the `R` code, but just display it, use `{r
-hello-world, eval = FALSE}`; if you want to show the output but not
-the code, use `{r hello-world, echo = FALSE}`.
-
-You can include plots, tables, and even mathematical equations using
-LaTeX. In summary, when exploring your data, or describing the methods
-for your paper, give R Markdown a try!
-
-You can find inspiration in this Boot Camp; the materials for Basic
-and Advanced Computing were written in R Markdown.
-
-Programming challenge
-=====================
-
-Instructions
-------------
-
-You will work with your group to solve the exercises below. When you
-have found the solutions, go to 
-[`https://jnovembre.github.io/BSD-QBio7`](https://jnovembre.github.io/BSD-QBio7)
-and follow the link "Submit solution to challenge 2" to submit your
-answer.
-At the end of the bootcamp, the group with the highest number of
-correct solutions will be declared the winner. If you need extra time,
-you can work with your group during free time or in the breaks in the
-schedule.
-
-Google Flu Trends
------------------
-
-Google Flu started strong, with a paper in *Nature* (Ginsberg *et al*,
-2009, [`doi:10.1038/nature07634`][ginsberg-2009]) showing that, using
-data on Web search engine queries, one could predict the number of
-physician visits for influenza-like symptoms.  Over time, the quality
-of predictions degraded considerably, requiring many adjustments to
-the model. Now defunct, Google Flu Trends has been proposed as a
-poster child of "Big Data hubris" (Lanzer *et al*, *Science*, 2014,
-[`doi:10.1126/science.1248506`][lanzer-2014]).  In the folder containing
-the Basic Computing 2 tutorial materials, you will find the data used
-by Preis and Moat in their 2014 paper
-([`doi:10.1098/rsos.140095`][preis-moat-2014]) to show that, after
-accounting for some additional historical data, Google Flu Trends are
-correlated with outpatient visits due to influenza-like illnesses.
-
-1. Read the data using function `read.csv`, and plot the number of
-   weekly outpatient visits versus the Google Flu Trends estimates.
-
-2. Calculate the (Pearson's) correlation using the `cor` function.
-
-3. The data span 2010--2013. In August 2013, Google Flu changed their
-   algorithm. Did this lead to improvements? Compare the data from
-   August and September 2013 with the same months in 2010, 2011
-   and 2012. For each, calculate the correlation, and see whether the
-   correlation is higher for 2013.
-
-**Hint:** You will need to extract the year from a string for each
-row. This can be done using `substr(gf$WeekCommencing, 1, 4)`, in
-which `gf` is the data frame containing the Google Flu data.
 
 [rseek]: http://rseek.org
 [cran-search]: http://search.r-project.org
