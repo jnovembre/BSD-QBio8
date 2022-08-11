@@ -6,9 +6,11 @@ output:
     latex_engine: pdflatex
     template: readable.tex
 author:
-  name: Sarah Cobey
-  affiliation: University of Chicago
-date: August 25, 2021
+  - name: Sarah Cobey (_original author_)
+    affiliation: University of Chicago
+  - name: Kyle Hernandez
+    affiliation: University of Chicago
+date: August 11, 2022
 geometry: margin=1in
 fontfamily: mathpazo
 fontsize: 11pt
@@ -53,7 +55,7 @@ In the first part of this tutorial, we will review key principles of defensive p
 
 # Part 1: Principles
 
-Part 1 focuses on defense. You saw a few of these principles in [Basic Computing 2](https://github.com/StefanoAllesina/BSD-QBio3/blob/master/tutorials/basic_computing_2/code/basic_computing_2.Rmd), but they are important enough to be repeated here.
+Part 1 focuses on defense. You saw a few of these principles in [Basic Computing 2](https://github.com/jnovembre/BSD-QBio8/blob/main/tutorials/basic_computing_2/basic_computing_2.pdf), but they are important enough to be repeated here.
 
 1. [Before writing code, draft your program as a series of modular functions with high-level documentation, and develop tests for it.](#principle-1-before-writing-code-draft-your-program-as-a-series-of-modular-functions-with-high-level-documentation-and-develop-tests-for-it)
 2. [Write clearly and cautiously.](#principle-2-write-clearly-and-cautiously)
@@ -372,7 +374,7 @@ In R, the standard for documenting the code is called [`roxygen2`](https://cran.
 
 To refactor code is to revise it to make it clearer, safer, or more efficient. Because it involves no changes in the scientific outputs (results) of the program, it might feel pointless, but it's usually not. Refactor when you realize that your variable and function names no longer reflect their true content or purpose (rename things quickly with `Ctrl + Alt + Shift + M`), when certain functions are obsolete or should be split into two, when another data structure would work dramatically better, etc. Any code that you'll be working with for more than a week, or that others might ever use, should probably be refactored a few times. Debugging will be easier, and the [code will smell better](https://en.wikipedia.org/wiki/Code_smell).
 
-**Important tip, repeated**: Run unit and system tests after refactoring to make sure you haven't messed anything up. This happens more than you might think.
+**Important tip, repeated**: Run unit and system tests after refactoring to make sure you haven't messed anything up. This happens more than you might think. You can even automate/enforce tests to run in GitHub!
 
 
 
@@ -402,7 +404,7 @@ At this point, we can attempt to argue that when different versions or experimen
 
 2. Of course, the source code, including comments and documentation in `roxygen2` style.
 
-3. Manage dependencies, preferably in a "[packrat](https://rstudio.github.io/packrat/)" repo. A packrat project has its own private package library. Any packages you install from inside a packrat project are only available to that project; and packages you install outside of the project are not available to the project.
+3. Manage dependencies, preferably in a "[packrat](https://rstudio.github.io/packrat/)" repo. A packrat project has its own private package library. Any packages you install from inside a packrat project are only available to that project; and packages you install outside of the project are not available to the project. _Note: [renv](https://rstudio.github.io/renv/articles/renv.html) is a stable replacement for packrat._
 
 4. The documentation, helping users to understand the code and in particular, if the code is to be part of a pipeline, explaining how to interact with the API it exposes. Where the work product is an analysis rather than a bit of code intended to carry out a task, writing a vignettes.
 
@@ -430,6 +432,8 @@ We'll focus on more advanced debugging tools in this part. First, some general g
 * *Isolate the error and make it reproducible.* Try to strip the error down to its essential parts so you can reliably reproduce the bug. If a function doesn't work, copy the code, and keep removing pieces that are non-essential for reproducing the error. When you post for help on the website [stackoverflow](https://stackoverflow.com), for instance, people will ask for a MRE or MWE---a [minimum reproducible (working) example](https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example). You need to have not only the pared code but also the inputs (parameter values and the seeds of any random number generators) that cause the problem. 
 * *Use assertions and debugging tools to hone in on the problem.* We've already seen how to use `stop()` and `stopifnot()` to identify logic errors in unit tests. We'll cover more advanced debugging here.
 * *Change/Test one thing at a time.* This is why we develop only one function at a time.
+
+_Note: Learning how to make MREs and how to find the relevant parts of code is especially applicable when finding bugs/issues in other people's code (even if it isn't R). The better your issue description is, the more likely the author's will be willing to help fix it! You can see an example of a bug I found in the Python package `pysam` and the issue I posted on GitHub [here](https://github.com/pysam-developers/pysam/issues/1038)._
 
 ### Tracing calls ###
 
