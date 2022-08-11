@@ -1,14 +1,14 @@
 ---
-title: "Basic Computing 1 --- Introduction to R"
+title: "Basic Computing 1 --- Introduction to R, Part 1"
 output:
   pdf_document:
-    keep_tex: false
+    keep_tex: true
     latex_engine: pdflatex
     template: readable.tex
 author:
-  name: Stefano Allesina and Peter Carbonetto
+  name: Peter Carbonetto and Aarti Venkat
   affiliation: University of Chicago
-date: August 23, 2021
+date: August 4, 2022
 geometry: margin=1in
 fontfamily: mathpazo
 fontsize: 11pt
@@ -16,14 +16,14 @@ spacing: single
 graphics: yes
 endnote: no
 chapter: 1
-thanks: "This document is included as part of the Basic Computing 1---Introduction to R tutorial packet for the BSD qBio Bootcamp, University of Chicago, 2021. **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: pcarbo@uchicago.edu. Thanks to John Novembre, Stephanie Palmer and Matthew Stephens for their guidance."
-abstract: "The aim of this workshop is to introduce `R` and `RStudio`,
-  and show how it can be used to analyze data in an automated,
-  replicable way. We will illustrate the notion of assignment and
-  present the main data structures available in `R`. We will learn how
-  to read, inspect, manipulate, analyze and write data, and how to
-  execute simple programs. This workshop is intended for biologists
-  with little to no background in programming."
+thanks: "This document is included as part of the Basic Computing 1---Introduction to R tutorial packet for the BSD qBio Bootcamp, University of Chicago, 2022. **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: pcarbo@uchicago.edu. Thanks to Stefano Allesina, John Novembre, Stephanie Palmer and Matthew Stephens for their guidance."
+abstract: "The aim of this workshop is to introduce R and RStudio,
+  and to use R to analyze data interactively. We will
+  focus on one particularly widely used data structure, the *data
+  frame.* We will learn how to import tabular data into a data frame,
+  and we will learn how to inspect, manipulate and analyze the data frame.
+  This workshop is intended for biologists with little to no background in
+  programming."
 ---
 
 ```{r knitr-opts, include=FALSE}
@@ -34,212 +34,98 @@ knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hide",
 About this tutorial
 ===================
 
-We will work through the tutorial examples all together as a class, as
-well as in smaller groups. Feel to free to try the examples on your
-own, before or after the in-class tutorial. To run the examples before
-the data have been collected in class, you may use the data from
-previous years, stored in files `laptop_2019.csv` and
-`laptop_2020.csv`. To use these data, rename one of them as
-`laptops.csv`.
+In this tutorial, we will learn about the basic elements of R through
+analysis of a small data set. You are welcome to try this tutorial on
+your own, before or after the in-class tutorial. To try the examples
+before the data have been collected in class, you may use the data
+from previous years, stored in files `laptops_2019.csv`,
+`laptops_2020.csv` and `laptops_2021.csv`. To use these data, make a
+copy of one of these files, and call it `laptops.csv.`
 
-Setup
-=====
+Do I have what I need?
+======================
 
-To complete the tutorial, you will need to install `R` and `RStudio`.
-To install `R`, follow instructions at [`cran.rstudio.com`][cran-rstudio].
-Then install `Rstudio` following the instructions at
-[`bit.ly/2JARd4v`][rstudio-download].
+To follow the examples in this tutorial, you will need to install R
+and RStudio. To install R, follow instructions at
+[`cran.rstudio.com`][cran-rstudio]. Then install Rstudio following the
+instructions at [`bit.ly/2JARd4v`][rstudio-download].
 
-Before starting up `RStudio`, it is helpful to quit applications that
-are not needed, and other "clutter", to reduce distractions.
+From GitHub, download the tutorial materials to your computer, and
+make sure you know where to find them.
 
-Launch `RStudio`. It is best if you start with a fresh workspace; you
-can refresh your environment by selecting **Session > Clear
-Workspace** from the `RStudio` menu. Also, make sure your R working
-directory is the same directory containing the tutorial materials; you
-can run `getwd()` and `list.files()` to check this.
+Now you can launch RStudio.
 
-Motivation
-==========
+Where am I?
+===========
 
-When it comes to analyzing data, there are two competing paradigms.
-One could use point-and-click software with a graphical user
-interface, such as Excel, to perform calculations and draw graphs; or
-one could write programs that can be run to perform the analysis of
-the data, the generation of tables and statistics, and the production
-of figures automatically.
+Make sure your R working directory in is the same directory containing
+the tutorial materials; you can run `getwd()` and `list.files()` to
+check this.
 
-This latter approach is preferred because it allows for the automation
-of analysis, it requires a good documentation of the procedures, and
-is completely replicable.
+Quit applications that are not needed and other "clutter" to reduce
+distractions. *Remember, the computer is device of distraction.*
 
-A few motivating examples:
+Also, it is best if you start with a fresh workspace; you can refresh
+your environment by selecting **Session > Clear Workspace** from the
+RStudio menu. 
 
-+ You have written code to analyze your data. You receive from your
-collaborators a new batch of data. With simple modifications of your
-code, you can update your results, tables and figures automatically.
+A data-centric view of programming
+==================================
 
-+ A new student joins the laboratory. The new student can read the
-code and understand the analysis without the need of a labmate
-showing the procedure step-by-step.
+There are many programming languages. Some of you may have experience
+with one of them, or more than one. R belongs to the modern family of
+*interactive programming languages* (e.g., Python, MATLAB, Julia), and
+was built on the revolutionary programming language Scheme developed
+at MIT. R inspires a "data-centric" view of programming, in which we
+focus on *data structures* (the objects) rather than procedures.
 
-+ The reviewers of your manuscript ask you to slightly alter the
-analysis. Rather than having to start over, you can modify a few
-lines of code and satisfy the reviewers.
+A brief tour of RStudio
+=======================
 
-Here we introduce `R`, which can help you write simple programs to
-analyze your data, perform statistical analysis, and draw beautiful
-figures.
+For this introductory tutorial, we will use RStudio. It is an Integrated
+Development Environment (IDE) for R. One advantage of RStudio is that
+the environment will look identical irrespective of your computer
+architecture (Windows, Mac, Linux). RStudio also has many features that
+make writing code easier.
 
-$$
-\mouse
-$$
+The main RStudio interface is split up into "panels", including:
 
-What is R?
-==========
-
-`R` is a statistical software that is completely programmable. This
-means that one can write a program ("script") containing a series of
-commands for the analysis of data, and execute them automatically.
-This approach is especially good as it makes the analysis of data
-well-documented, and completely replicable.
-
-`R` is free software: anyone can download its source code, modify it,
-and improve it. The `R` community of users is vast and very active. In
-particular, scientists have enthusiastically embraced the program,
-creating thousands of packages to perform specific types of analysis,
-and adding many new capabilities. See [`www.r-pkg.org`][r-pkg] for a
-listing of official packages (which have been vetted by `R` core
-developers); many more are available on Bioconductor, GitHub and other
-websites.
-
-The main hurdle new users face when approaching `R` is that it is
-based on a command-line interface; when you launch `R` or `RStudio`,
-you open a console with the character `>` signaling that `R` is ready
-to accept an input. When you write a command and press `Enter`, the
-command is interpreted by `R`, and the result is printed immediately
-after the command. For example, this calculates the sum $1 + 2 +
-\cdots + 99$ and prints the result:
-
-```{r mean-1-to-100, results="hold"}
-sum(1:99)
-```
-
-A little history
-----------------
-
-`R` was modeled after the commercial statistical software `S` by
-Robert Gentleman and Ross Ihaka. The project was started in 1992,
-first released in 1994, and the first stable version appeared
-in 2000. Today, `R` is managed by the *R Core Team*.
-
-A "data-centric" view of programming
-------------------------------------
-
-For those of you who already have experience with a programming
-language---interactive (e.g., MATLAB, Python) or otherwise (e.g., C++,
-Java)---you will find that there is much to learn and discover in `R`.
-One distinguishing feature of `R` is that it promotes a *data-centric*
-view of programming practice; that is, it is not the proedures
-(actions) that are the primary focus, but instead the *data
-structures* (objects). This is not accidental---analysis of data is
-central to `R`. Appreciating this emphasis on data can help you
-navigate `R`, particularly if you are more familiar with procedural
-programming langauges such as C++.
-
-$$
-\fruitfly
-$$
-
-RStudio
-=======
-
-For this introduction, we're going to use `RStudio`, an Integrated
-Development Environment (IDE) for `R`. One advantage of RStudio is
-that the environment will look identical irrespective of your computer
-architecture (Linux, Windows, Mac). Also, `RStudio` makes writing code
-much easier by automatically completing commands and file names
-(simply type the beginning of the name and press `Tab`), and allowing
-you to easily inspect data and code.
-
-The main `RStudio` interface is split up into "panels". The most
-important panels are:
-
-1. **Console:** This is a panel containing an instance of `R`. For this
+1. **Console:** This is a panel containing an instance of R. For this
 tutorial, we will work mainly in this panel.
 
-2. **Source:** In this panel, you can write a program and save it to a
+2. **Source:** In this panel, you can write your code and save it to a
 file. The code and also be run from this panel, but the actual results
-show up in the Console.
+show up in the console.
 
-3. **Environment:** This panel lists all the variables you created
-(more on this later).
+3. **Environment:** This panel lists all the variables (objects) you
+created in your R environment.
 
 4. **History:** This gives you the history of the commands you typed.
 
-4. **Plots:** This panel shows you all the plots you drew. Other tabs
-allow you to access the list of packages you have loaded, and the help
-page for commands (e.g., type `help(p.adjust)` in the Console).
+4. **Plots:** This panel shows you all the plots you drew.
 
-What is an R "program"?
-=======================
+Other tabs allow you to access the list of packages you have loaded,
+and the help page for commands (e.g., type `help(p.adjust)` in the
+console).
 
-An `R` program is simply a list of commands, which are executed one
-after the other (for this reason, it is sometimes called a "script").
-The commands are written in a text file (with extension `.R`). When
-`R` executes the program, it will start from the beginning of the file
-and proceed toward the end of the file. Every time `R` encounters a
-command, it will execute it. Special commands can modify this basic
-flow of the program by, for example, executing a series of commands
-only when a condition is met, or repeating the execution of a series
-of commands multiple times.
+Activity: Collaborative data collection
+=======================================
 
-Note that if you were to copy and paste (or type) the code into the
-**Console** you would obtain exactly the same result. The advantage of
-a program, or "script", is that it allows for automating the
-computations; that is, it eliminates the manual copying and
-pasting. Moreover, after a while you will have accumulated a lot of
-code, at which point you can reuse much of your code for new projects.
+To perform a data analysis, we need a data set to analyze. We will
+collect the data collaboratively.
 
-Tutorial outline
-================
+Specifically, we will collect data about the laptops of incoming BSD
+graduate students. Once we have collected the data, we will write some
+R code to answer basic questions such as: what is the most common
+operating system among the population (where "population" is the
+cohort of incoming BSD grad students)?
 
-In this tutorial, we will learn about the basic elements of `R`
-through analysis of a small data set. This will involve:
-
-1. Collecting the data.
-
-2. Deciding on some analysis goals.
-
-3. Importing the data into `R`.
-
-4. Inspecting the data.
-
-5. Manipulating the data.
-
-6. Automating the analysis.
-
-$$
-\athaliana
-$$
-
-In-class activity: Collaborative data collection
-================================================
-
-We begin this tutorial by collecting the data we will analyze.
-Specifically, we will collect data about the laptops (or desktops) of
-incoming BSD graduate students. We will use these data to learn about
-`R`, and how it can be used to analyze a data set; we will write some
-`R` code that can be used to answer basic questions such as, what is
-the most common operating system among the population (where
-"population" is all the current incoming BSD grad students)?
-
-We will collect the data in Etherpad. Specifically, we will collect
-four data points: first name, operating system, amount of memory (in
-GB), and number of processors ("cpus"). We will enter these data into
-a table with four columns. We will use commas to separate the columns
-in the table. The first few lines of the table will look something
-like this:
+We will collect the data in the Etherpad. We will record four data
+points: first/given name, operating system, amount of memory (in GB),
+and number of processors (CPUs). We will enter these data into a
+table with four columns. We will use commas to separate the columns in
+the table. The first few lines of the table will look something like
+this:
 
 ```
 name,os,mem,cpus
@@ -248,70 +134,39 @@ anna,windows,4,1
 peter,mac,16,4
 ```
 
-If you are unsure how to enter some of this information, ask your
-teammates or peers for help.
+Ask your teammates or neighbors for help if you are unsure how to
+find this information about your laptop.
 
-Once we have collected the data from the entire class, we will create
-a new file in `RStudio`, copy & paste the data (including table
-header) into the new file, and save the file as `laptops.csv`.
-
-In-class activity: Formulate analysis aims
-==========================================
-
-Before writing any `R` code to explore the data, it is helpful to have
-a focus to the exploration. Suppose you are in charge of designing the
-QBio programaming tutorials for next year's incoming BSD graduate
-cohort.  What information about the students laptops would help in
-designing the course? Here are some basic questions we might want to
-answer:
-
-+ What are the different operating systems used?
-
-+ Which operating system is used most?
-
-+ Are all the laptops multicore (more than one processor)?
-
-Write down a few more guiding questions in the space below. Try to
-state your questions using plain (non-technical) language, avoiding
-statistical terms such as "mean", "correlation" and "significant".
+Once we have collected the data from the entire class, I will create a
+CSV file, `laptops.csv`, and share it with you on Box.
 
 $$
-\framebox[\textwidth]{\rule{0pt}{10em}}
+\yeast
 $$
 
 Import the data into R
 ======================
 
 You should now have a CSV file on your computer, `laptops.csv`,
-containing the data we collected. (CSV is an abbreviation of
-"comma-separated values".) The standard `R` function for importing
-data from a CSV file is `read.csv`:
+containing the data we collected. (What is CSV short for?) The
+basic R function for importing data from a CSV file is
+called `read.csv`:
 
 ```{r read-data-1}
-read.csv("laptops.csv", comment = "#", stringsAsFactors = FALSE)
+laptops <- read.csv("laptops.csv",comment = "#",stringsAsFactors = FALSE)
 ```
 
 In time, we will understand what this code is doing. For now, we will
 jump ahead.
 
-This command will only work if your `R` working directory is the same
+This command will only work if your R working directory is the same
 as the directory containing `laptops.csv`. You can check your working
 directory with `getwd()` and `list.files()`. If you are in the wrong
-directory, use **Session > Set Working Directory** from the `RStudio`
+directory, use **Session > Set Working Directory** from the RStudio
 menu bar to move to the right directory.
 
-This line of code, on its own, is a dead-end; all it does is print the
-result to the screen. What is missing from this expression is
-*assignment of the output to an object.* A common and frustrating
-mistake---even experienced programmers make this mistake---is
-forgetting to assign the output.
-
-```{r read-data-2}
-laptops <- read.csv("laptops.csv", comment = "#", stringsAsFactors = FALSE)
-```
-
-A good name for the new object helps remind you of its contents (and
-it is particularly important when you have created many objects).
+Whenever you create an object, you need to give it a name. A good name
+reminds you of its contents and its purpose.
 
 Assuming you started with a clean workspace, your workspace, or
 "environment", should now contain a single object, `laptops`:
@@ -333,7 +188,7 @@ Or you can explicitly type
 print(laptops)
 ```
 
-which does the exact same thing.
+which does the same thing.
 
 What *kind* of object is it?
 
@@ -341,187 +196,274 @@ What *kind* of object is it?
 class(laptops)
 ```
 
-It is a "data frame". This is `R`'s term for "table" or "spreadsheet".
-(You will find that `R` has a habit of renaming things you are already
-familiar with.)
+It is a *data frame*. This is R's way of saying "tabular data" or
+"spreadsheet".
 
 If you are used to the "point-and-click" way of doing things in
 software such as Excel, it may seem burdensome to have arrived at this
 point where we have written a bunch of code, and all we have done is
 printed the contents of the table to the screen. But now that we have
-created a data frame, `laptops`, there are many powerful things we can
-do it. Also bear in mind that the advantages of the programmatic
-approach to data analysis are less obvious when working with small
-data sets, but the techniques we use here also work with large data
-sets that are not so easily analyzed by point-and-click (e.g., tables
-containing millions of rows).
+created a data frame, there are many things we can do it.
+
+Note the advantages of R are less striking when working with a small
+data set. We will work with a larger data set in Part 2.
 
 Inspect the data
 ================
 
-`R` has many commands that are easy to use and quickly give you
+R has many commands that are easy to use and quickly give you
 insight into the data. Let's try some of the more commonly used
 commands for inspecting and summarizing the contents of a data
-frame. You might want to add a note next to each line of code to
-remind yourself what it does:
+frame.
 
-```{r inspect-laptops-1}
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][6em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r inspect-laptops, echo=FALSE}
 nrow(laptops)
 ncol(laptops)
 head(laptops)
 tail(laptops)
-str(laptops)
 summary(laptops)
 ```
 
-Some of these commands, like `head`, `str` and `summary`, are
-"generic" functions, meaning that they work for many object types,
-from basic types to complex data structures. Generic functions such as
-these are routinely used, and they will likely become part of your
-go-to data analysis toolkit.
+Some of these commands, like `head` and `summary`, are "generic"
+functions, meaning that they work for many types of objects.
 
-Data subviews
-=============
+Now we will proceed to learn about R by trying to answer some basic
+questions about laptops. The first questions can be answered with very
+simple code, and then the code will get progressively more complicated.
 
-This data set is small enough that you can easily inspect all of it by
-eye. However, when you are working with a much larger data set you
-need a strategy to inspect manageable subsets of the data.
+$$
+\octopus
+$$
 
-Each of the examples below print a subset of the data. As before, add
-a note next to each line of code to remind yourself what it does.
+Simple questions
+----------------
 
-```{r inspect-laptops-2}
-laptops[ ,2]
-laptops[[2]]
-laptops[ ,"os"]
-laptops["os"]
-laptops$os
-laptops[4, ]
-laptops[4, 2]
-laptops[4, "os"]
-laptops$os[4]
-laptops[4, ]$os
+*What is the largest and smallest amount of memory?*
+
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][4em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r max-min-mem, echo=FALSE}
+max(laptops$mem)
+min(laptops$mem)
 ```
 
-Here are a few slightly more complex examples:
+*What is the most and least number of CPUs?*
 
-```{r inspect-laptops-3}
-laptops[1:4, ]
-laptops[ ,2:3]
-laptops[ ,c("os", "mem")]
-laptops[c("os", "mem")]
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][4em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r max-min-cpus, echo=FALSE}
+max(laptops$cpus)
+min(laptops$cpus)
 ```
 
-Once you are comfortable with the basic elements of selecting subsets,
-you can combine these elements in an endless variety of ways, e.g.,
+*What is the most common CPU amount, the most common memory amount,
+and the most common combination of CPUs and memory?*
 
-```{r inspect-laptops-4} 
-laptops[c(1:3, 5:7), c("name", "os")]
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][6em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r count-mem-cpus, echo=FALSE}
+table(laptops$mem)
+table(laptops$cpus)
+table(laptops$cpus,laptops$mem)
+which.max(table(laptops$cpus))
+which.max(table(laptops$mem))
 ```
 
-Creating new data sets from subviews
-------------------------------------
+$$
+\tetrahymena
+$$
 
-The result of almost any calculation in R can be saved to an object.
-This includes selecting subsets. For example,
+More difficult questions
+------------------------
 
-```{r first-laptops-1}
-x <- laptops[1:10, ]
-print(x)
-class(x)
+*Does anyone in Basic Computing 1 share the same name?*
+
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][4em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r shared-names, echo=FALSE}
+any(table(laptops$name) > 1)
+all(table(laptops$name) == 1)
 ```
 
-creates a new table (a data frame) from the first 10 rows of full
-`laptops`. There should now be two data frames in your environment:
+*Are all the laptops multicore (more than one processor)?*
 
-```{r ls-2}
-ls()
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][4em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r multicore-laptops, echo=FALSE}
+all(laptops$cpus > 1)
+any(laptops$cpus == 1)
 ```
 
-Objects can also be *overwritten*:
+*Who has the most CPUs?*
 
-```{r first-laptops-3}
-x <- laptops[1:5, ]
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][6em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r who-has-most-cpus, echo=FALSE}
+n <- max(laptops$cpus)
+rows <- which(laptops$cpus == n)
+laptops[rows,"name"]
 ```
 
-The 10-row table you created is now gone.
+*How many different OSs are there, and which OS is used most?*
 
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][10em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r count-os, echo=FALSE}
+rows <- which(laptops$os == "window" |
+              laptops$os == "Window" |
+              laptops$os == " windows" |
+              laptops$os == " Windows")
+laptops[rows,"os"] <- "windows"
+rows <- which(laptops$os == "macOS" |
+              laptops$os == " mac" |
+              laptops$os == " Mac")
+laptops[rows,"os"] <- "mac"
+table(laptops$os)
+which.max(table(laptops$os))
+```
 Observe that both assignment (creating new objects) and overwriting
 both use `<-`. So be careful---*there is no undo command in R!*
 
-This ability to have multiple data sets floating around in your
-environment underscores the importance of naming your objects well,
-and keep track of what is in your environment; names such as "x" or
-"temp" or "dat", while commonly used, should only be used for
-temporary or "throwaway" calculations. It isn't unusual to have half a
-dozen different copies of a data set over the course of an
-analysis. This is where the `rm` function also comes in handy for
-cleaning up your workspace. Another important practice is to document
-your code in case you do accidentally overwrite something important!
+This ability to overwrite and have multiple data objects floating
+around in your environment underscores the importance of *naming your
+objects well* and *keeping track of what is in your environment*;
+names such as "x", "y", "temp" or "data", while commonly used, should
+only be used for temporary or "throwaway" calculations. It isn't
+unusual to have half a dozen different copies of a data set over the
+course of an analysis. Another important practice is to document your
+code and periodically save your results in case you do accidentally
+overwrite something important!
 
-Conditional subviews
---------------------
+*Among Mac laptops (or Windows laptops), what is the average amount of
+ memory?*
 
-One powerful way to inspect subsets is by condition. For example, to
-view all the laptops with exactly two processors, do
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][10em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
 
-```{r laptops-subset-1}
-subset(laptops, cpus == 2)
+```{r mem-mac-and-windows, echo=FALSE}
+rows <- which(laptops$os == "windows")
+windows_laptops <- laptops[rows,]
+mean(windows_laptops$mem)
+rows <- which(laptops$os == "mac")
+mac_laptops <- laptops[rows,]
+mean(mac_laptops$mem)
 ```
 
-There are at least a couple other ways to achieve the same thing:
+Hypothesis: Windows laptops tend to have more memory than Mac laptops. *True or false?*
+---------------------------------------------------------------------------------------
 
-```{r laptops-subset-2}
-laptops[laptops$cpus == 2, ]
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][10em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+```{r windows-vs-mac-mem, echo=FALSE}
+mean(windows_laptops$mem)
+mean(mac_laptops$mem)
+sd(windows_laptops$mem)
+sd(mac_laptops$mem)
+fit <- lm(mem ~ os,laptops)
+print(fit)
+summary(fit)
 ```
 
-and
+Save your work
+--------------
 
-```{r laptops-subset-3}
-rows <- which(laptops$cpus == 2)
-laptops[rows, ]
+This is a good time to save our work. To save your results, go to
+**Session > Save Workspace As** in RStudio, or run
+
+```{r save-session-1, eval=FALSE}
+save.image("basic_computing_1.RData")
 ```
 
-The last approach is interesting because it involves creating a new
-*numeric* object containing the numbers of the rows we are interested
-in.
+Later, to restore your environment, select **Session > Load
+Workspace** in RStudio, or run
 
-We will learn more about logical expressions below.
-
-**Question:** Which way is best?
-
-**Exercise:** How would you select the subset of laptops that have
-Windows?
-
-```{r laptops-subset-4, echo=FALSE}
-subset(laptops, os == "windows")
+```{r load-session, eval=FALSE}
+load("basic_computing_1.RData")
 ```
 
-A side note: "`<-`" versus "`=`"
---------------------------------
+*What is the difference between* **File > Save As** *and* **Session >
+Save Workspace As**?
 
-Let's take a moment to discuss a common point of confusion. In `R`,
-the equality symbol (`=`) can also be used for creating and
-overwriting objects. Many people prefer to use `=`, but we recommend
-against using it because:
+$$
+\marmoset
+$$
 
-1. The `=` is easily confused with `==`. (How are `=` and `==`
-different?)
+Deconstructing the data frame
+=============================
 
-2. The `=` is also used for named arguments to functions (see the
-`read.csv` call above for an example). This is not assignment---no
-objects are created or overwritten. (Some people do incorrectly all
-this "assignment"---feel free to correct them.)
+Let's now take a second look at the laptops data frame, with a greater
+intention toward understanding R.
 
-Deconstructing the "laptops" data frame
-=======================================
+The data frame is an example of a *composite data structure*---that
+is, it is made of simpler data objects. These "atomic" data objects
+are R's "building blocks" for all other data structures. R has a very
+large variety of composite data structures, but the data frame may be
+the most popular.
 
-We will continue to explore the laptops data frame. A data frame is an
-example of a *composite* data structure---it is made of simpler data
-objects. These simpler ("atomic") data objects are `R`'s "building
-blocks" for all other data structures. In a data frame, the *columns*
-are the atomic data objects; in the next sections, we will take a
-close look at the columns of the `laptops` data frame.
+In a data frame, the *columns are the atomic data objects*; in the
+next sections, we will closely examine the individual columns of the
+laptops data frame.
 
 Text data
 ---------
@@ -533,7 +475,7 @@ x <- laptops$os
 print(x)
 ```
 
-In `R`, the `character` type is used to store text data:
+In R, the "character" type is used to store text data:
 
 ```{r text-data-2}
 class(x)
@@ -547,44 +489,32 @@ x[1]
 x[2]
 ```
 
-`R` has many built-in functions for operating on text data. Here are
-some examples (add notes explaining what these lines of code do):
+R has many built-in functions for operating on text data. Here are
+some examples:
 
 ```{r text-data-4}
 nchar(x)
 toupper(x)
 sort(x)
 unique(x)
-table(x)
-paste(x[1], x[2], x[3])
+paste(x[1],x[2],x[3])
 ```
 
-If you want to learn more about a particular function, `R` has
-extensive documentation that can accessed directly from the Console
-(no need to Google it). For example, to learn more about the `sort`
-function, type
-
-```{r help-sort, eval=FALSE}
-help(sort)
-```
-
-From this help page, you will learn, among other things, that you can
-control the order of the sorting using the `decreasing` option, and by
-default entries are sorted in increasing order.
+*Which of these functions are specific to text data?*
 
 Just as data types can be combined to form more complex data
 structures, operations can also be combined (provided the combination
 makes sense, of course!). For example,
 
 ```{r text-data-5}
-unique(toupper(x))
+toupper(unique(x))
 ```
 
 is effectively equivalent to
 
 ```{r test-data-6}
-y <- toupper(x)
-unique(y)
+y <- unique(x)
+toupper(y)
 ```
 
 Numeric data
@@ -598,7 +528,7 @@ class(x)
 ```
 
 Specifically, it is an integer type since all the numbers are
-whole numbers. There is another data type, `numeric`, used to store
+whole numbers. There is another data type, "numeric", used to store
 real numbers (or rather their approximations, as computers have
 limited memory and thus cannot store numbers like $\pi$, or even
 $0.2$), e.g.,
@@ -608,26 +538,21 @@ y <- x / 100
 class(y)
 ```
 
-Very small or very large numbers can be represented in `R` (any idea
-what the `^` operator is doing?):
-
-```{r numeric-data-3}
-x^10
-```
-
-Like the `character` data type, a numeric object is a vector, and
+Like the character data type, a numeric object is a vector, and
 individual elements can be accessed their index,
 
-```{r numeric-data-4}
+```{r numeric-data-3}
 x[1]
 x[2]
 ```
 
-Also, like the `character` data type, `R` has many built-in functions
+Also, like the character data type, R has many built-in functions
 for working with numbers, such as
 
-```{r numeric-data-5}
-abs(x)
+```{r numeric-data-4}
+sum(x)
+max(x)
+range(x)
 sqrt(x)
 cos(x)
 log(x)
@@ -635,74 +560,37 @@ log(x)
 
 Notice that, for example, `log(x)` computes the logarithm for *each
 data point in* `x`, and the result is *a vector of the same length as*
-`x`. This is idea of automatically applying an operation to each entry
-of a vector is sometimes called "vectorization". In `R`, vectorization
-is quite natural because vectors are one of the elemental data
-structures. Vectorization allows complex operations to be accomplished
-very simply; for example, if `x` contains 10 million numbers, `y <-
-sqrt(x)` will compute the square root of these 10 million numbers, and
-store the result in vector `y`.
+`x`. This allows large calculations to be accomplished very simply;
+for example, if `x` contains 10 million numbers, `y <- sqrt(x)` will
+compute the square root of these 10 million numbers, and store the
+result in vector `y`.
 
-Some functions are more versatile, and can work with different data
-types:
-
-```{r numeric-data-6}
-sort(laptops$mem)
-sort(laptops$os)
-table(laptops$mem)
-table(laptops$os)
-```
-
-Given that `R` was born for statistics, there are many statistical
+Given that R was born for statistics, there are many statistical
 operations---from basic to sophisticated---that you can perform on
-numeric data (add notes next to these lines explaining what they do):
+numeric data:
 
-```{r numeric-data-7}
-min(x)
-max(x)
-range(x)
-sum(x)
+```{r numeric-data-5}
 median(x)
-quantile(x, 0.5)
-mean(x)
-summary(x)
+var(x)
+quantile(x)
 ```
 
 Finally, standard mathematical operations such as `+` (addition), `-`
 (subtraction), `*` (multiplication), `/` (division), and `^`
-(exponentiation) can be applied to numbers. A less familiar operator
-is the modulo (`%%`), which gives the remainder from integer division:
-
-```{r numeric-data-8}
-x %% 3
-```
+(exponentiation) can be applied to numbers.
 
 For more complex calculations, the mathematical and statistical
-operations can be combined together, for example,
+operations can be combined, for example,
 
-```{r numeric-data-9}
-y <- log(x / mean(x))
-```
-
-**Exercise:** Combine some of the functions and/or operators mentioned
-above to compute the standard deviation of `x`. Compare your
-answer against R's built-in solution, `y <- sd(x)`. *Hint:* Use the
-definition of variance. Write your answer in the box below.
-
-$$
-\framebox[\textwidth]{\rule{0pt}{3em}}
-$$
-
-```{r numeric-data-10, echo=FALSE}
-n <- length(x)
-sqrt(n / (n-1) * mean((x - mean(x))^2))
+```{r numeric-data-6}
+y <- log(x + 0.1)
 ```
 
 Logical data
 ------------
 
-The `laptops` data set does not contain logical data. But we can
-*generate* logical data from one of the columns:
+The laptops data frame does not contain logical data. But we can
+generate logical data from one of the columns:
 
 ```{r logical-data-1}
 x <- laptops$os == "mac"
@@ -712,163 +600,74 @@ class(x)
 
 The logical data type takes only two values, `TRUE` and `FALSE`.
 
-**Exercises:**
+**Exercise 1:** Besides equality, other comparison operators include
+`>` (greater than), `<` (less than), `!=` (differs) and `>=` and
+`<=`. Write an expression using one or more of these operators to
+create some new logical data.
 
-1. Besides equality, other comparison operators include `>` (greater
-than), `<` (less than), `!=` (differs) and `>=` and `<=`. Write an
-expression using one or more of these operators to create some new
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][4em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
+$$
+
+**Exercise 2:** You can also formulate more complicated logical
+statements (perhaps using multiple variables or columns of a data
+frame) using `&` (and), `|` (or), and `!` (not). Write an expression
+using these operators, as well as the ones above, to create some new
 logical data.
 
 $$
-\framebox[\textwidth]{\rule{0pt}{3em}}
-$$
-
-2. You can also formulate more complicated logical statements (perhaps
-using multiple variables or columns of a data frame) using `&` (and),
-`|` (or), and `!` (not). Write an expression using these operators, as
-well as the ones above, to create some new logical data.
-
-$$
-\framebox[\textwidth]{\rule{0pt}{3em}}
+\framebox[\textwidth][l]{
+\begin{minipage}[t][4em]{2in}
+\faFlask \rule{0pt}{1em} 
+\small\sf\em Write your code here.
+\end{minipage}}
 $$
 
 $$
-\zebrafish
+\ecoli
 $$
 
-Manipulating data
-=================
+Activity: what is a "factor"?
+=============================
 
-Up until now, we have treated the laptops data frame as if it were a
-static object. But like almost any other object in `R`, a data frame
-can be modified and overwritten. This is very powerful but also
-obviously dangerous! Here we will illustrate a few of the many kinds
-of data manipulations we can make, building on the elements we learned
-above. But before doing so, it is good practice to create a copy of
-the data frame in case we make a mistake along the way:
+So far, we have gotten familiar with three basic data types:
+character, numeric and logical. There is a fourth important atomic
+data type in R: *the factor.* Unknowningly, we have already used a
+factor in the examples above.
 
-```{r modify-data-1}
-laptops2 <- laptops
-```
+What is unusual about factors is that
+there is no equivalent of factors in other popular programming
+languages, at least not as a native data type. And yet you will find
+that they are extremely useful. 
 
-Note that `laptops` and `laptops2` are two *entirely independent*
-copies of the data. Although they are identical at first, as soon you
-a make change to `laptop2`, you will have two different data sets.
-Again, when you have multiple versions of a data set present in your
-environment, it is your responsibility to keep your environment
-organized.
-
-You can overwrite individual entries of the data frame, or several
-entries at once:
-
-```{r modify-data-2}
-laptops2[c(1, 2), "mem"] <- 2
-```
-
-Using a conditional subview, we can replace all instances of "mac"
-values in the "os" column with "macOS":
-
-```{r modify-data-3}
-rows <- which(laptops2$os == "mac")
-laptops2[rows, "os"] <- "macOS"
-```
-
-If you don't like the column names, you can also change them, too:
-
-```{r modify-data-5}
-colnames(laptops2) <- c("name", "OS", "GB", "CPUs")
-```
-
-You can reorder the rows or columns:
-
-```{r modify-data-6}
-rows     <- order(laptops2$name)
-laptops2 <- laptops2[rows, ]
-laptops2 <- laptops2[c("name", "CPUs", "GB", "OS")]
-```
-
-Or you can even create new columns:
-
-```{r modify-data-7}
-n <- nrow(laptops2)
-laptops2$id <- seq(1, n)
-laptops2$MB <- 1000 * laptops2$GB
-```
-
-$$
-\nematode
-$$
-
-Building a data frame
-=====================
-
-Above, we deconstructed the `laptops` data frame, and we found that
-the constituent parts are the table columns (data vectors). We also go
-in the reverse direction---we can build a data frame by joining
-together data vectors. Here's a small illustration of this:
-
-```{r build-laptops-1}
-x <- laptops$os
-y <- laptops$cpu
-```
-
-Given text data `x` and numeric data `y`, construct a new data
-frame:
-
-```{r build-laptops-2}
-dat <- data.frame(os = x, cpu = y)
-```
-
-$$
-\octopus
-$$
-
-In-class activity: what is a "factor"?
-======================================
-
-So far, we have gotten acquainted with three basic data types:
-`character`, `numeric` and `logical`. Here we introduce a fourth: the
-`factor`. Factors are vectors, like the other atomic data types we
-have seen. What is unusual about factors is that there is no
-equivalent of factors in other popular programming languages, at least
-not as a native data type. Here we will explore factors and understand
-how and when they could be useful.
-
-None of the columns in our `laptops` table are a factor, but we can
-create a factor from one of the columns using a function appropriately
-called "factor". Let's try this with the "mem" column:
+None of the columns in the laptops data frame are a factor. But, like
+the logical data type, we can create a factor from other data
+types. Let's try this with both the "mem" and "os" columns:
 
 ```{r factors-1}
-x <- laptops$mem
-y <- factor(x)
+x <- factor(laptops$mem)
+y <- factor(laptops$os)
 class(x)
 class(y)
 ```
 
-Let's now inspect the contents of `x` and `y`:
+Now run the following lines of code:
 
 ```{r factors-2}
 print(x)
 print(y)
 summary(x)
 summary(y)
+as.numeric(x)
+as.numeric(y)
 ```
 
-How should we interpret the second data summary?
-
-Let's try the same with the "os" column:
-
-```{r factors-4}
-x <- laptops$os
-y <- factor(x)
-class(x)
-class(y)
-summary(x)
-summary(y)
-```
-
-**Question:** Based on the summaries of the two factors, what do you
-think a factor is?
+**Question:** Based on the results from running thiis code, what do
+  you think a factor is?
 
 **More questions:** Which representation to do you prefer for "mem",
 numeric or factor? What about the "os" column? Are other columns good
@@ -876,70 +675,60 @@ candidates for being factors?
 
 These questions---should I convert my data to a factor---touch on the
 broader question of *data representation* or *data encoding*.
-Choosing the right representation of your data can be important to
-your analysis. Judicious use of factors can also help you perform
-complex calculations very simply. (In fact you may find that factors
-are useful in the programming challenge.)
+Choosing the right representation of your data can be important to an
+effective data analysis. (You might find that factors are useful in
+the programming challenge.)
 
 If you prefer the "os" column to be a factor, for example, you can
 change it inside the data frame by doing
 
-```{r factors-5}
+```{r factors-5, eval=FALSE}
+summary(laptops)
 laptops$os <- factor(laptops$os)
+summary(laptops)
 ```
-
-Save your work
-==============
-
-Since are nearing the end of the tutorial, so this is a good point to
-save our work. To save your results, go to **Session > Save Workspace
-As** in `RStudio`, or run
-
-```{r save-session-1, eval=FALSE}
-save.image("basic_computing_1.RData")
-```
-
-Later, to restore your environment, select **Session > Load
-Workspace** in RStudio, or run
-
-```{r load-session, eval=FALSE}
-load("basic_computing_1.RData")
-```
-
-**Question:** What is the difference between **File > Save
-As** and **Session > Save Workspace As**? 
 
 $$
-\butterfly
+\nematode
 $$
 
-Group activity: Analysis of laptops data
-========================================
+Activity: Analyze laptop trends over time
+=========================================
 
-In this activity, your team will pick two or three of the guiding
-questions that you and others have formulated, and use R to answer
-these questions.
+Having gotten a bit of a feel for how to analyze data in R, we will
+now use the laptops data collected by BSD grad students over several
+years to *explore trends in laptops over time.* This is a freeform
+activity that will require some creativity and teamwork.
 
-Before writing any code, discuss with your team what steps you will
-take to answer a question. Points of discussion may include: (1)
-What column(s) will you need? (2) What calculations or operations will
-you need to perform? (3) Will you need to perform your calculations on
-all rows, or a subset of the rows?
+Before writing any R code, formulate some questions which will guide
+your analysis, such as: Did memory or number of CPUs tend to increase
+over time? Do more students prefer Macs now than they did in 2019?
+Write down a few guiding questions in the space below.
 
-For each question, record your answer, as well as the code you wrote
-to generate the answer.
+$$
+\framebox[\textwidth][l]{
+\begin{minipage}[t][8em]{4in}
+\faPencil \rule{0pt}{1em} 
+\small\sf\em Formulate your guiding questions here.
+\end{minipage}}
+$$
 
-Use this code to create a *script* or a *program*---a text file
-containing the code necessary to run the data analysis, starting with
-reading the data into R, and ending with the calculations that
-produce the answers.
+These next few lines of code import the laptops data from the years
+2019--2021, and combine them into a single data frame. *You will need
+to modify this code if you want to also include the data from 2022.*
 
-Once you have written your script, verify that it runs, and save the
-file somewhere on your computer. Give your script a memorable name
-such as `analyze_laptops_data.R`. Also, a few comments (these are
-lines starting with "`#`") explaining in plain language what the code
-does. We will use Etherpad to share our programs.
+```{r merge-laptops-data}
+laptops_2019 <- read.csv("laptops_2019.csv",comment = "#",stringsAsFactors = FALSE)
+laptops_2020 <- read.csv("laptops_2020.csv",comment = "#",stringsAsFactors = FALSE)
+laptops_2021 <- read.csv("laptops_2021.csv",comment = "#",stringsAsFactors = FALSE)
+laptops_2019$year <- 2019
+laptops_2020$year <- 2020
+laptops_2021$year <- 2021
+laptops <- rbind(laptops_2019,laptops_2020,laptops_2021)
+```
 
+At the end of this activity we will share and discuss these analyses
+using the Etherpad.
 
 $$
 \spinosaurus
@@ -953,13 +742,8 @@ Instructions
 
 Work with your team to solve the following exercise.  When you have
 found the solution, go to the
-[`jnovembre.github.io/BSD-QBio7`][bsd-qbio-site] and follow the
+[`jnovembre.github.io/BSD-QBio8`][bsd-qbio-site] and follow the
 link "Submit solution to challenge 1" to submit your answer.
-
-At the end of the boot camp, the group with the highest number of
-correct solutions will be declared the winner. If you need extra time,
-you can work with your group during free time or in the breaks in the
-schedule.
 
 Collaboration strategy
 ----------------------
@@ -968,10 +752,10 @@ Before diving into the problems, first agree on a collaboration
 strategy with your teammates. Important aspects include communication
 and co-ordination practices, and setting goals and deadlines. How will
 your team collaborate on code, and share solutions? (Consider online
-resources such as Etherpad or the UofC-hosted Google Drive.) The aim
-is not just to complete the challenges, but also to do
-collaboratively; all team members should be included, and should
-have the opportunity to contribute and learn from each other.
+resources such as Etherpad or Google Drive.) The aim is not just to
+complete the challenges, but also to do collaboratively; all team
+members should be included, and should have the opportunity to
+contribute and learn from each other.
 
 Nobel nominations
 -----------------
@@ -998,8 +782,7 @@ Hints
 + You will need to subset the data. To make your calculations more
 clear, it may be helpful to give names to the columns. For example,
 suppose you imported the data into a data frame called `nobel`. Then
-`colnames(nobel) <- c("field", "year", "nominee")` should do the
-trick.
+`colnames(nobel) <- c("field","year","nominee")` should do the trick.
 
 + The simplest way to obtain a count from a vector is to use the
 `table` function. For example, the command `sort(table(x))` produces a
@@ -1015,37 +798,237 @@ each unique pair of occurrences in `x` and `y`.
 `colMeans`, `factor`, `head`, `length`, `max`, `read.csv`, `subset`,
 `tail`, `tapply`, `unique`, `which` and `which.max`.
 
-+ Save your solution code for each exercise in a file.
++ Record your solutions *as well as the code you used to obtain such
+  solutions*.
+
+Other topics
+============
+
+Why R?
+------
+
+When it comes to analyzing data, there are two competing paradigms.
+One could use point-and-click software with a graphical user
+interface, such as Excel, to perform calculations and draw graphs; or
+one could write programs that can be run to perform the analysis of
+the data, the generation of tables and statistics, and the production
+of figures automatically.
+
+This latter approach is preferred because it allows for the *automation
+of analysis*, it requires a good documentation of the procedures, and
+is *completely replicable.*
+
+A few motivating examples:
+
++ You have written code to analyze your data. You receive from your
+collaborators a new batch of data. With simple modifications of your
+code, you can update your results, tables and figures automatically.
+
++ A new student joins the laboratory. The new student can read the
+code and understand the analysis without the need of a labmate
+showing the procedure step-by-step.
+
++ The reviewers of your manuscript ask you to slightly alter the
+analysis. Rather than having to start over, you can modify a few
+lines of code and satisfy the reviewers.
+
+R is a statistical software that is *completely programmable.* This
+means that one can write a program ("script") containing a series of
+commands for the analysis of data, and execute them automatically.
+This approach is especially good as it makes the analysis of data
+well-documented, and completely replicable.
+
+R is *free software*: anyone can download its source code, modify it,
+and improve it. The R community of users is vast and very active. In
+particular, scientists have enthusiastically embraced the program,
+creating thousands of packages to perform specific types of analysis,
+and adding many new capabilities. See [`www.r-pkg.org`][r-pkg] for a
+listing of official packages (which have been vetted by R core
+developers); many more are available on Bioconductor, GitHub, and other
+websites.
+
+R was modeled after the commercial statistical software S by Robert
+Gentleman and Ross Ihaka. The project was started in 1992, first
+released in 1994, and the first stable version appeared in 2000.
+Today, R is managed by the *R Core Team*.
 
 $$
 \xenopus
 $$
 
-Additional topics
+Data subviews
+-------------
+
+When you are working with a much larger data set you need a strategy
+to inspect manageable subsets ("slices") of the data.
+
+```{r read-data-2}
+laptops <- read.csv("laptops.csv",comment = "#",stringsAsFactors = FALSE)
+```
+
+Each of the examples below print a subset of the data.
+
+```{r subviews-1}
+laptops[,2]
+laptops[[2]]
+laptops[,"os"]
+laptops["os"]
+laptops$os
+laptops[4,]
+laptops[4,2]
+laptops[4,"os"]
+laptops$os[4]
+laptops[4,]$os
+```
+
+Here are a few slightly more complex examples:
+
+```{r subviews-2}
+laptops[1:4,]
+laptops[,2:3]
+laptops[,c("os","mem")]
+laptops[c("os","mem")]
+```
+
+Once you are comfortable with the basic elements of selecting subsets,
+you can combine these elements in an endless variety of ways, e.g.,
+
+```{r subvviews-3}
+laptops[c(1:3,5:7),c("name","os")]
+```
+
+Creating new data sets from subviews
+------------------------------------
+
+The result of almost any calculation in R can be saved to an object.
+This includes selecting subsets. For example,
+
+```{r first-laptops-1}
+x <- laptops[1:10,]
+print(x)
+class(x)
+```
+
+creates a new data frame from the first 10 rows.
+
+Conditional subviews
+--------------------
+
+One powerful way to inspect subsets is by condition. For example, to
+view all the laptops with 4 processors, do
+
+```{r laptops-subset-1}
+rows <- which(laptops$cpus == 4)
+laptops[rows,]
+```
+
+**Exercise:** How would you select the subset of laptops that are
+running the Windows operating system?
+
+```{r laptops-subset-2, echo=FALSE}
+rows <- which(laptops$os == "windows")
+laptops[rows,]
+```
+
+Manipulating data
 =================
+
+Up until now, we have treated the laptops data frame as if it were a
+static object. But like almost any other object in R, a data frame
+can be modified and overwritten. This is very powerful but also
+obviously dangerous! Here we will illustrate a few of the many kinds
+of data manipulations we can make, building on the elements we learned
+above. But before doing so, it is good practice to create a copy of
+the data frame in case we make a mistake along the way:
+
+```{r modify-data-1}
+laptops2 <- laptops
+```
+
+Note that `laptops` and `laptops2` are two *entirely independent*
+copies of the data. Although they are identical at first, as soon you
+a make change to `laptop2`, you will have two different data sets.
+Again, when you have multiple versions of a data set present in your
+environment, it is your responsibility to keep your environment
+organized.
+
+You can overwrite individual entries of the data frame, or several
+entries at once:
+
+```{r modify-data-2}
+laptops2[c(1,2),"mem"] <- 2
+```
+
+Using a conditional subview, we can replace all instances of "mac"
+values in the "os" column with "macOS":
+
+```{r modify-data-3}
+rows <- which(laptops2$os == "mac")
+laptops2[rows,"os"] <- "macOS"
+```
+
+If you don't like the column names, you can also change them, too:
+
+```{r modify-data-4}
+colnames(laptops2) <- c("name","OS","GB","CPUs")
+```
+
+You can reorder the rows or columns:
+
+```{r modify-data-5}
+rows <- order(laptops2$name)
+laptops2 <- laptops2[rows,]
+laptops2 <- laptops2[c("name","CPUs","GB","OS")]
+```
+
+Or you can even create new columns:
+
+```{r modify-data-6}
+laptops2$MB <- 1000 * laptops2$GB
+```
+
+$$
+\butterfly
+$$
+
+Building a data frame
+=====================
+
+Above, we deconstructed the laptops data frame. We can also go
+in the reverse direction and build a data frame by joining
+together data vectors. Here's an illustration.
+
+```{r build-laptops-1}
+x <- laptops$os
+y <- laptops$cpu
+```
+
+Given text data `x` and numeric data `y`, construct a new data
+frame:
+
+```{r build-laptops-2}
+dat <- data.frame(os = x,cpu = y)
+```
 
 Creating data
 -------------
 
-Above, we imported data into `R`. In addition to viewing and
-manipulating existing data, `R` also has many facilities for creating
-data structures, either from scratch, or from existing data. (We
-already saw some examples of this.)
+R also has many facilities for creating data structures from scratch.
 
 The most basic tool is the `c` function, short for "combine". It can
 combine multiple objects or values:
 
 ```{r creating-data-1}
-x      <- c(2, 3, 5, 27, 31, 13, 17, 19) 
-sex    <- c("M", "M", "F", "M", "F")           # Sex of Drosophila
-weight <- c(0.230, 0.281, 0.228, 0.260, 0.231) # Weight (in mg)
+x      <- c(2,3,5,27,31,13,17,19) 
+sex    <- c("M","M","F","M","F")           # Sex of Drosophila
+weight <- c(0.230,0.281,0.228,0.260,0.231) # Weight (in mg)
 ```
 
-You can generate sequences of numbers using `seq`. For example, this
-generates all odd numbers from 1 to 100:
+You can quickly generate sequences of numbers using `seq`. For
+example, this generates all odd numbers from 1 to 100:
 
 ```{creating-data-2}
-x <- seq(from = 1, to = 100, by = 2)
+x <- seq(from = 1,to = 100,by = 2)
 ```
 
 For simpler number sequences, use the colon operator:
@@ -1054,11 +1037,11 @@ For simpler number sequences, use the colon operator:
 x <- 1:10
 ```
 
-To repeat a value (or values) several times, use `rep`:
+To repeat a value (or values), use `rep`:
 
 ```{r creating-data-4}
-x <- rep("treated", 5)  # Treatment status
-x <- rep(c(1, 2, 3), 4)
+x <- rep("treated",5)  # Treatment status
+x <- rep(c(1,2,3),4)
 ```
 
 Finally, there are many functions for generating random numbers. For
@@ -1068,8 +1051,6 @@ example,
 x <- runif(100)
 ```
 
-**Question:** What is the result of running `runif(100)`?
-
 Matrices
 --------
 
@@ -1078,7 +1059,7 @@ key difference is that all the columns must be of the same type.
 Here's an example of a 2 x 2 matrix:
 
 ```{r matrices-1}
-A <- matrix(c(1, 2, 3, 4), 2, 2)  # Inputs are values, nrows, ncols.
+A <- matrix(c(1,2,3,4),2,2)  # Inputs are values, nrows, ncols.
 ```
 
 In the case of numeric values, you can perform the usual operations on
@@ -1102,11 +1083,11 @@ dim(A)
 Use indices to access a particular row or column of a matrix:
 
 ```{r matrices-4}
-Z <- matrix(1:9, 3, 3)
-Z[1, ]              # First row.
-Z[ ,2]              # Second column.
-Z[1:2, 2:3]         # Submatrix with coefficients in rows 1 & 2, and columns 2 & 3.
-Z[c(1, 3), c(1, 3)] # Indexing non-adjacent rows and columns.
+Z <- matrix(1:9,3,3)
+Z[1,]            # First row.
+Z[,2]            # Second column.
+Z[1:2,2:3]       # Submatrix with coefficients in rows 1 & 2, and columns 2 & 3.
+Z[c(1,3),c(1,3)] # Indexing non-adjacent rows and columns.
 ```
 
 Some operations apply to all elements of the matrix:
@@ -1125,7 +1106,7 @@ Arrays
 If you need tables with more than two dimensions, use arrays:
 
 ```{r arrays-1}
-A <- array(1:24, c(4, 3, 2))
+A <- array(1:24,c(4,3,2))
 ```
 
 A matrix is a special case of an array with two dimensions.
@@ -1137,13 +1118,13 @@ dim(A)
 ```
 
 And you can access the elements as for matrices. One thing to be
-careful about: `R` drops dimensions that are not needed. So, if you
+careful about: R drops dimensions that are not needed. So, if you
 access a "slice" of a 3-dimensional array, you should obtain a matrix:
 
 ```{r arrays-3}
-A[ ,2, ]
-dim(A[ ,2, ])
-class(A[ ,2, ])
+A[,2,]
+dim(A[,2,])
+class(A[,2,])
 ``` 
 
 Lists
@@ -1168,16 +1149,29 @@ mylist$last_modified <- "September 9, 2019"
 
 We could not do this in a data frame.
 
-A list is a very general and very widely used `R` data structure for
+A list is a very general and very widely used R data structure for
 storing complex data.
+
+"`<-`" versus "`=`"
+-------------------
+
+In R, a common point of confusion in is that the equality symbol (`=`)
+can also be used for creating or overwriting objects. Many people
+prefer to use `=`, but we recommend against using it because:
+
+1. `=` is easily confused with `==`. (How are `=` and `==`
+different?)
+
+2. The `=` is also used for named arguments to functions, *which is
+different from assignment.*
 
 Missing data
 ------------
 
-Finally, `R` allows most types of data---text, numeric, factors,
+Finally, R allows most types of data---text, numeric, factors,
 *etc*---to take on a special value, `NA`. This is short for "not
 available" or "not assigned", and is commonly called "missing
-data". One special feature of `R` is that it often gracefully
+data". One special feature of R is that it often gracefully
 handles data sets containing missing data.
 
 **Exercise:** Set a few entries in the `laptops` data frame to the
@@ -1187,19 +1181,19 @@ to a copy of the data frame instead.) Then run `summary(laptops)`. How
 are the missing data reported in the summary?
 
 $$
-\tiktaalik
+\mouse
 $$
 
-Optional group activity: Analyzing genetic data
-===============================================
+Optional activity: Analyzing genetic data
+=========================================
 
 In this activity, you will apply the tools we have developed so far to
 look at an example data set from human genetics: genotype data on
 chromosome 6 collected from European individuals. (Data adapted from
-the [Human Genome Diversity Project][hgdp] by John Novembre.)
+the Human Genome Diversity Project by John Novembre.)
 
 ```{r genetic-data-1}
-chr6 <- read.table("H938_Euro_chr6.geno", header = TRUE)
+chr6 <- read.table("H938_Euro_chr6.geno",header = TRUE)
 ```
 
 Setting `header = TRUE` means that we want to take the first line to
@@ -1225,12 +1219,12 @@ are:
 
 + `A2`: The other allele.
 
-Write `R` code to answer the following questions:
+Write R code to answer the following questions:
 
 1. How many individuals were sampled? Find the maximum of the sum
 `nA1A1 + nA1A2 + nA2A2`. *Hint:* Recall that you can access the
-columns by index (e.g., `chr6[ ,5]`), or by name (e.g., `chr6$nA1A1`,
-or `chr6[ ,"nA1A1"]`).
+columns by index (e.g., `chr6[,5]`), or by name (e.g., `chr6$nA1A1`,
+or `chr6[,"nA1A1"]`).
 
 2. Use the `rowSums` function to obtain the same answer.
 
@@ -1239,11 +1233,11 @@ or `chr6[ ,"nA1A1"]`).
 4. How many SNPs have less than 1% heterozygotes?
 
 $$
-\ecoli
+\macaque
 $$
 
 [cran-rstudio]: https://cran.rstudio.com
 [rstudio-download]: https://www.rstudio.com/products/rstudio/download
 [r-pkg]: https://www.r-pkg.org
-[bsd-qbio-site]: https://jnovembre.github.io/BSD-QBio7
+[bsd-qbio-site]: https://jnovembre.github.io/BSD-QBio8
 [hgdp]: http://hagsc.org/hgdp

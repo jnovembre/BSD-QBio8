@@ -1,0 +1,56 @@
+# Source: University of Chicago BSD qBio7 cohort
+# September 9, 2021
+# University of Chicago, Chicago, IL
+#
+name,os,mem,cpus
+Sidney, Mac, 16, 4
+Kasia, mac,8,4
+Swen, windows, 16, 4
+Michelle, Mac, 32, 1
+Nia, windows, 16, 3
+Ramses,Window,16,6
+Lucas,windows,32,4
+peter,mac,16,4
+kathyann,mac,8,1
+gwen,mac,8,2
+Evgeniya, mac, 8, 2
+Aidan,windows,16,4
+Matt,mac,16,4
+taryn,mac,8,2
+Sammy,mac,8,2
+kelton,windows,16,2
+jamarcus,windows,16,4
+dylan,macOS,16,4
+Max, mac, 8, 8
+Yiding,mac,8,4
+brandon,mac,16,4
+Parisa,mac,8,2
+sofia,mac,8,4
+katieA,mac,16,4
+Hsin-Chiao,window, 16,4
+rory,mac,16,8
+Casey,mac,8,8
+sarahsaxton,mac,16,8
+Jennifer,mac,8,2
+Christian,mac,8,2
+mira,mac,4,2
+Ola, mac,8,2
+Kasia, Windows, 16,4
+paola,mac,8,2
+vicky,windows,8,4
+joanna,mac,16,8
+maia,windows,16,6
+Zulfar,windows,16,7
+Michael,windows,8,2
+Chisondi, mac, 32, 2
+amanda,mac,8,2
+kay, mac, 16,6
+Claire,mac,8,8
+Caroline,windows,8,4
+jared, windows, 8, 4
+lai,mac,16,6
+Dimitrios,windows,8,4
+KatieD, mac,8,2
+Mary,mac,8,8
+Alec, Mac, 8, 3.3
+Joyce,mac,8,8

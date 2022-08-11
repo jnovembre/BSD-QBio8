@@ -11,7 +11,7 @@ all: handout
 handout: basic_computing_1.pdf
 
 # Create the handout.
-basic_computing_1.pdf : basic_computing_1.Rmd
+basic_computing_1.pdf : basic_computing_1.Rmd readable.tex
 	Rscript -e 'rmarkdown::render("basic_computing_1.Rmd",output_file="basic_computing_1.pdf")'
 
 clean:
