@@ -57,17 +57,17 @@ In the first part of this tutorial, we will review key principles of defensive p
 
 Part 1 focuses on defense. You saw a few of these principles in [Basic Computing 2](https://github.com/jnovembre/BSD-QBio8/blob/main/tutorials/basic_computing_2/basic_computing_2.pdf), but they are important enough to be repeated here.
 
-1. [Before writing code, draft your program as a series of modular functions with high-level documentation, and develop tests for it.](#principle-1-before-writing-code-draft-your-program-as-a-series-of-modular-functions-with-high-level-documentation-and-develop-tests-for-it)
-2. [Write clearly and cautiously.](#principle-2-write-clearly-and-cautiously)
-3. [Develop one function at a time, and test it before writing another.](#principle-3-develop-one-function-at-a-time-and-test-it-before-writing-another)
-4. [Document often.](#principle-4-document-often)
-5. [Refactor often.](#principle-5-refactor-often)
-6. [When you run your code, save each "experiment" in a separate directory with a complete copy of the code repository and all parameters.](#principle-6-when-you-run-your-code-save-each-experiment-in-a-separate-directory-with-a-complete-copy-of-the-code-repository-and-all-parameters)
-7. [Don't be *too* defensive.](#principle-7-dont-be-too-defensive)
+1. [Before writing code, draft your program as a series of modular functions with high-level documentation, and develop tests for it.](#principle-1)
+2. [Write clearly and cautiously.](#principle-2)
+3. [Develop one function at a time, and test it before writing another.](#principle-3)
+4. [Document often.](#principle-4)
+5. [Refactor often.](#principle-5)
+6. [When you run your code, save each "experiment" in a separate directory with a complete copy of the code repository and all parameters.](#principle-6)
+7. [Don't be *too* defensive.](#principle-7)
 
 In part 2, we will focus on what to do when tests (from Principle 3) indicate something is wrong.
 
-### Principle 1. Before writing code, draft your program as a series of modular functions with high-level documentation, and develop tests for it.
+### Principle 1. Before writing code, draft your program as a series of modular functions with high-level documentation, and develop tests for it. {#principle-1}
 
 Many of us have had the experience of writing a long paper only to realize, several pages in, that we in fact need to say something slightly different. Restructuring a paper at this stage can be a real chore. Outlining your code as you would outline a paper avoids this problem. In fact, outlining your code can be even more helpful because it helps you think not just generally about how your algorithm will flow and where you want to end up, but also about what building blocks (functions and containers) you'll use to get there. Thinking about the "big picture" design will prevent you from coding yourself into a tight spot---when you realize hundreds of lines in that you should've been tracking past states of a variable, for instance, but your current containers are only storing the current state. Drafting also makes the actual writing much more easy and fun.
 
@@ -120,7 +120,7 @@ This is also a good time to draft very high-level documentation for your code, f
 > * How could you test the inputs, functions, and overall program?
 > * Discuss your approach with your neighbor.
 
-### Principle 2. Write clearly and cautiously.
+### Principle 2. Write clearly and cautiously. {#principle-2}
 
 You're already on your way to writing clearly and cautiously if you outline your program before you start writing it. Here we'll discuss some practices to follow as you write.
 
@@ -178,7 +178,7 @@ but the former is obviously safer.
 **Avoid repetitive code.** If you ever find yourself copying and pasting a section of code, perhaps modifying it slightly each time, stop. It's almost certainly worth writing a function instead. The code will be easier to read, and if you find an error, it will be easier to debug.
 
 
-### Principle 3. Develop one function at a time, and test it before writing another.
+### Principle 3. Develop one function at a time, and test it before writing another. {#principle-3}
 
 The first part of this principle is easy for scientists to understand. When building code, we want to change one thing at a time. Controlled experiments are a great way to understand what's going on. Thus, we start by writing just a single function. It might not do exactly what we want it to do in the final program (e.g., it might contain mostly placeholders for functions it calls that we haven't written yet), but we want to be intimately familiar with how our code works in every stage of development.
 
@@ -362,7 +362,7 @@ With scientific programming, it is critical to simplify code to the point where 
 
 It's hard to overstate the importance of taking a step back from the nitty-gritty of programming and asking, Are these results reasonable? Does the output make sense with different sets of extreme values? Schedule time to do this, and update your system tests when necessary. Please don't expect your collaborators to do this work for you (unless you've arranged to trade this kind of help).
 
-### Principle 4. Document often.
+### Principle 4. Document often. {#principle-4}
 It is helpful to keep a running list of known "[issues](https://guides.github.com/features/issues/)" with your code, which would include the functions left to implement, the tests left to run, any strange bugs/behavior, and features that might be nice to add later. Sites like GitHub and Bitbucket allow you to associate issues with your repositories and are thus very helpful for collaborative projects, but use whatever works for you. Having a formal to-do list, however, is much safer than sprinkling to-do comments in your code (e.g., `# CHECK THIS!!!`). It's easy to miss comments.
 
 Research code will always need a `readme` describing the software's purpose and implementation. It's easiest to develop it early and update as you go.
@@ -370,7 +370,7 @@ Research code will always need a `readme` describing the software's purpose and 
 In R, the standard for documenting the code is called [`roxygen2`](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html). Upon pressing Ctrl+Shift+option+R, RStudio automatically generate a little roxygen2 skeleton for a local piece of function. We can fill in different fields with basic information about our function.
 
 
-### Principle 5. Refactor often.
+### Principle 5. Refactor often. {#principle-5}
 
 To refactor code is to revise it to make it clearer, safer, or more efficient. Because it involves no changes in the scientific outputs (results) of the program, it might feel pointless, but it's usually not. Refactor when you realize that your variable and function names no longer reflect their true content or purpose (rename things quickly with `Ctrl + Alt + Shift + M`), when certain functions are obsolete or should be split into two, when another data structure would work dramatically better, etc. Any code that you'll be working with for more than a week, or that others might ever use, should probably be refactored a few times. Debugging will be easier, and the [code will smell better](https://en.wikipedia.org/wiki/Code_smell).
 
@@ -378,7 +378,7 @@ To refactor code is to revise it to make it clearer, safer, or more efficient. B
 
 
 
-### Principle 6. When you run your code, save each "experiment" in a separate directory with a complete copy of the code repository and all parameters.
+### Principle 6. When you run your code, save each "experiment" in a separate directory with a complete copy of the code repository and all parameters. {#principle-6}
 
 When you're done developing the code and are using it for research, keep results organized by creating a separate directory for each execution of the code that includes not only the results but also the precise code used to generate the results. This way, you won't accidentally associate one set of parameters with results that were in fact generated by another set of parameters. Here's a sample workflow, assuming your repository is located remotely on GitHub, and you're in a UNIX terminal:
 
@@ -410,7 +410,7 @@ At this point, we can attempt to argue that when different versions or experimen
 
 For more details, see this [article](https://www.r-bloggers.com/2018/07/the-ten-rules-of-defensive-programming-in-r/) by Chris. 
 
-### Principle 7. Don't be *too* defensive.
+### Principle 7. Don't be *too* defensive. {#principle-7}
 
 This is not necessary:
 
