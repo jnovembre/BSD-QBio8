@@ -59,7 +59,7 @@ pdftk tmp.pdf ../other_docs/blank.pdf output tmp2.pdf; mv tmp2.pdf tmp.pdf
 pdftk tmp.pdf ../../tutorials/basic_computing_2/basic_computing_2.pdf output tmp2.pdf; mv tmp2.pdf tmp.pdf
 
 ## insert blank page
-#pdftk tmp.pdf ../other_docs/blank.pdf output tmp2.pdf; mv tmp2.pdf tmp.pdf
+pdftk tmp.pdf ../other_docs/blank.pdf output tmp2.pdf; mv tmp2.pdf tmp.pdf
 
 ## Advanced I and II
 pdftk tmp.pdf ../../tutorials/advanced_computing/tutorial/advanced_computing.pdf output tmp2.pdf; mv tmp2.pdf tmp.pdf
@@ -119,7 +119,7 @@ pdftk tmp.pdf ../other_docs/blank.pdf output tmp2.pdf; mv tmp2.pdf tmp.pdf
 pdftk tmp.pdf ../../workshops/jjberg/code/MBL_WorkshopJJB.pdf output tmp2.pdf; mv tmp2.pdf tmp.pdf
 
 ## insert blank page
-pdftk tmp.pdf ../other_docs/blank.pdf output tmp2.pdf; mv tmp2.pdf tmp.pdf
+#pdftk tmp.pdf ../other_docs/blank.pdf output tmp2.pdf; mv tmp2.pdf tmp.pdf
 
 ## Khan
 pdftk tmp.pdf ../../workshops/akhan/lecture/qbio6_khan.pdf output tmp2.pdf; mv tmp2.pdf tmp.pdf
