@@ -5,8 +5,7 @@ cd ../compile_workbook
 echo Initializing manual pdf...
 
 cp ../other_docs/cover.pdf tmp.pdf
-## Use cover_alt.pdf made by VP based on cover.pdf 
-pdftk ../other_docs/cover_alt.pdf ../other_docs/blank.pdf cat output tmp.pdf
+pdftk ../other_docs/cover.pdf ../other_docs/blank.pdf cat output tmp.pdf
 
 ## Map # Revised
 #pdftk tmp.pdf ../other_docs/map.pdf cat output tmp2.pdf; mv tmp2.pdf tmp.pdf
