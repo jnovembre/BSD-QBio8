@@ -1,16 +1,18 @@
 ---
 title: "Advanced Computing --- Data wrangling and plotting"
 author:
-  name: Stefano Allesina
-  affiliation: University of Chicago
+  - name: Stefano Allesina (original author) 
+    affiliation: University of Chicago
+  - name: John Novembre
+    affiliation: University of Chicago
 date: "August 25, 2021"
 output:
-  html_document:
-    df_print: paged
   pdf_document:
-    keep_tex: no
+    keep_tex: true
     latex_engine: pdflatex
     template: readable.tex
+  html_document:
+    df_print: paged
 chapter: 3
 geometry: margin=1in
 fontfamily: mathpazo
@@ -18,9 +20,7 @@ fontsize: 11pt
 spacing: single
 graphics: yes
 endnote: no
-thanks: 'This document is included as part of the Advanced Computing tutorial packet
-  format(Sys.time(), ''%B %d, %Y'')`.'
-  for the BSD qBio Bootcamp, University of Chicago, 2021. **Current version**: `r
+thanks: "This document is included as part of the workshop packet for the BSD qBio Bootcamp, University of Chicago, 2021. **Current version**: `r format(Sys.time(), '%B %d, %Y')`."
 ---
 
 ```{r setup, echo=FALSE, eval=TRUE}
@@ -76,10 +76,10 @@ filter(pubs, Year > 2009)
 
 You can see that 515 of the 953 documents were published in the last 10 years. We have used the command `filter(tbl, conditions)` to select certain observations. We can combine several conditions, by listing them side by side, possibly using logical operators.
 
-> **Exercise:** what does this do?
->```{r}
+**Exercise:** what does this do?
+```{r}
  filter(pubs, Year == 2008, `Source title` == "Nature", `Cited by` > 100)
- ```
+```
 
 Note that the "back ticks" can be used to type column names that contain spaces and non-standard characters. This is nice, because otherwise the name of the column would need to be altered (as done automatically by `read.csv`, sometimes creating column names that are difficult to interpret or type).
 
@@ -589,7 +589,7 @@ $$
 
 Chicago's Divvy bike-share system (the light blue bikes you will see around town) collects data on all its rides and shares them publically, after anonymizing the rider info (https://www.divvybikes.com/system-data).  The file `data/202107-divvy-tripdata.csv` contains a list of all the Divvy bike rides taken in Chicago in July 2021. Form small groups and work on the following exercises.  Hint: use the package `lubridate` to work with days, dates, time:
 
-- **Ride map** write a function that takes as input a calendar date (YYYY-MM-DD), and draws a map of all the starting points of rides. Mark a point for each occurrence using the starting latitude and longitude `start_lat` and `start_lng`. Set the `alpha` to something like 0.1 to show brighter colors in areas with many occurrences.  Use colour to indicate (Optional: Add a feature that draws a line from the starting location to end location)
+- **Ride map** write a function that takes as input a calendar date (YYYY-MM-DD), and draws a map of all the starting points of rides. Mark a point for each occurrence using the starting latitude and longitude `start_lat` and `start_lng`. Set the `alpha` to something like 0.1 to show brighter colors in areas with many occurrences.  Use color to indicate member type or ride type (Optional: Add a feature that draws a line from the starting location to end location)
 
 - **Daily usage profile for the month**: Make a bar plot of the number of rides per day across the 31 days of the month. Produce a facet graph that stratifies the results by member type (the `member_casual` field). Also use the `fill` to denote the `rideable_type`.  
 
@@ -599,11 +599,11 @@ Chicago's Divvy bike-share system (the light blue bikes you will see around town
 
 - **Number of rides of different lengths by day of the week** plot the number of rides against the day of the week, faceting by ride length class. 
 
-- **Rides by neighborhood** write a function that takes as input a given day, and produces a histogram of the number of rides per neighborhood on that day (i.e. x-axis is number of rides, y-axis is number of neighborhoods). A table relating `starting_station_id` to neighborhood (where neighborhood is assigned using the Google Maps API) is found in the file `data/202107-divvy-station_id_neighborhoods.csv`. You will need to `join` the tables before plotting.  What is the mean number of rides per neighborhod?  What is the max number?  What are the topp 5 "neighborhoods" for Divvy rides.
+- **Rides by neighborhood** write a function that takes as input a given day, and produces a histogram of the number of rides per neighborhood on that day (i.e. x-axis is number of rides, y-axis is number of neighborhoods). A table relating `starting_station_id` to neighborhood (where neighborhood is assigned using the Google Maps API) is found in the file `data/202107-divvy-station_id_neighborhoods.csv`. You will need to `join` the tables before plotting.  What is the mean number of rides per neighborhood?  What is the max number?  What are the top 5 "neighborhoods" for Divvy rides.
 
 - **Interactions**: Create a table with the starting station, ending station, and the number of rides between each station.   What is a feature of the most frequent trips that you observe? (Advanced: Create a graph showing edges connecting stations where the edge color represents the number of trips taken)
 
-- **Miscellaneous**: if you'd like to play more, the `spDistsN1` function of the sp library returns distances as a function of latitute/longitude pairs.  
+- **Miscellaneous**: if you'd like to play more, the `spDistsN1` function of the sp library returns distances as a function of latitude/longitude pairs.  
 
 
 
