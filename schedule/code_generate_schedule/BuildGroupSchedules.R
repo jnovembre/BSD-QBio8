@@ -22,7 +22,7 @@ activities <- inner_join(activities, group_names)
 # Create a column for starting time; arrange all events by group and start time
 activities <- activities %>%
   rowwise() %>%
-  mutate(StartTime = paste0("9/", Day, "/2021 ", strsplit(Time, "-")[[1]][1], " ", AMPM)) %>%
+  mutate(StartTime = paste0("9/", Day, "/2022 ", strsplit(Time, "-")[[1]][1], " ", AMPM)) %>%
   mutate(StartTime = parse_date_time(StartTime, "%m/%d/%Y %I:%M %p", tz = "America/New_York")) %>%
   arrange(Group, StartTime)
 
@@ -52,7 +52,7 @@ output:
     latex_engine: xelatex
     keep_tex: true
 ---")
-  cat("\n# BSD qBio$^7$ ")
+  cat("\n# BSD qBio$^8$ ")
   cat("\n\n")
   cat(paste0("## Group Schedule: *", group_name_long, "*"))
   cat("\n")
@@ -126,7 +126,7 @@ output:
     keep_tex: true
     pandoc_args: ["numberLines"]
 ---')
-cat("\n# BSD qBio$^7$ @ MBL")
+cat("\n# BSD qBio$^8$ ")
 cat("\n\n")
 cat(paste0("## General Schedule"))
 cat("\n")
