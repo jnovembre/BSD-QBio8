@@ -5,12 +5,12 @@ author:
     affiliation: University of Chicago
   - name: John Novembre
     affiliation: University of Chicago
-date: "August 25, 2021"
+date: "August 16, 2022"
 output:
   pdf_document:
     keep_tex: true
     latex_engine: pdflatex
-    template: readable.tex
+    template: readable_advanced_computing.tex
   html_document:
     df_print: paged
 chapter: 3
@@ -20,7 +20,7 @@ fontsize: 11pt
 spacing: single
 graphics: yes
 endnote: no
-thanks: "This document is included as part of the workshop packet for the BSD qBio Bootcamp, University of Chicago, 2021. **Current version**: `r format(Sys.time(), '%B %d, %Y')`."
+thanks: "This document is included as part of the workshop packet for the BSD qBio Bootcamp, University of Chicago, 2022. **Current version**: `r format(Sys.time(), '%B %d, %Y')`."
 ---
 
 ```{r setup, echo=FALSE, eval=TRUE}
@@ -142,9 +142,10 @@ pubs %>% summarise(avg = mean(`Cited by`),
                     median = median(`Cited by`))
 ```
 
-$$
+<!-- $$
 \zebrafish
 $$
+-->
 
 ## Summaries by group
 
@@ -203,9 +204,11 @@ pubs %>%
 
 in this way, you can easily comment out a part of the pipeline (or add another piece in the middle).
 
+<!--
 $$
 \octopus
 $$
+-->
 
 # Data plotting
 The most salient feature of scientific graphs should be clarity. Each figure should make crystal-clear a) what is being plotted; b) what are the axes; c) what do colors, shapes, and sizes represent; d) the message the figure wants to convey. Each figure is accompanied by a (sometimes long) caption, where the details can be explained further, but the main message should be clear from glancing at the figure (often, figures are the first thing editors and referees look at).
@@ -268,9 +271,11 @@ As you can see, we wrote a well-formed sentence, composed of **data** + **mappin
 ggplot(data = pubs) + aes(x = Year, fill = Journal) + geom_bar()
 ```
 
+<!--
 $$
 \nematode
 $$
+-->
 
 ## Scatterplots
 
@@ -477,9 +482,11 @@ ggplot(data = small_collab) +
   geom_bar(data = large_collab, fill = "blue", alpha = 0.5)
 ```
 
+<!--
 $$
 \tiktaalik
 $$
+-->
 
 # Tidying up data
 
@@ -512,9 +519,11 @@ avg_authors %>% gather(Journal, Average_num_authors, 2:3)
 avg_authors %>% gather(Journal, Average_num_authors, -Year)
 ```
 
+<!--
 $$
 \mouse
 $$
+-->
 
 # Joining tables
 
@@ -580,10 +589,11 @@ Besides `inner_join(x, y)`, you can use:
 
 - `anti_join(x, y)`: return all rows from `x` where there are not matching values in `y`.
 
+<!--
 $$
 \yeast
 $$
-
+-->
 
 ## Exercise in groups
 
