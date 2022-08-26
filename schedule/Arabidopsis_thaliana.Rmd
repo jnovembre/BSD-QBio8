@@ -16,75 +16,76 @@ output:
     latex_engine: xelatex
     keep_tex: true
 ---
-# BSD qBio$^7$ 
+# BSD qBio$^8$ 
 
 ## Group Schedule: *Arabidopsis thaliana*
  ![](https://github.com/StefanoAllesina/BSD-QBio5/raw/master/logo_group/Arabidopsis_thaliana.png)     
 
-### Thursday, September 9 
+### Thursday, September 8 
 
-------------------    --------------------------------------------------------------------------------------
-**10:30-11:00**       Check-in with TAs at BSLC lobby                                                       
-**11:00-11:20**       Welcome to qBio7 - Novembre and Cobey (BSLC 109)                                      
-**11:20-12:00**       Team-building activities                                                              
-**12:00-1:30**        Lunch and group compacts                                                              
-**1:30-3:00**         Basic/Advanced comp. I (BSLC 109/205)                                                 
-**1:30-3:00**         Basic/Advanced comp. I (BSLC 109/205)                                                 
-**3:00-3:30**         Coffee break                                                                          
-**3:30-5:00**         Basic/Advanced comp. I (BSLC 109/205)                                                 
-**3:30-5:00**         Basic/Advanced comp. I (BSLC 109/205)                                                 
-------------------    --------------------------------------------------------------------------------------
+------------------    ---------------------------------------------------------
+**10:30-11:00**       Check-in with TAs at BSLC lobby                          
+**11:00-11:20**       Welcome to qBio8 - Novembre Carbonetto Hall (BSLC 109)   
+**11:20-12:00**       Team-building activities                                 
+**12:00-1:30**        Lunch and group compacts                                 
+**1:30-3:00**         Basic/Advanced comp. I (BSLC 008/109/205)                
+**1:30-3:00**         Basic/Advanced comp. I (BSLC 008/109/205)                
+**3:00-3:30**         Coffee break                                             
+**3:30-5:00**         Basic/Advanced comp. I (BSLC 008/109/205)                
+**3:30-5:00**         Basic/Advanced comp. I (BSLC 008/109/205)                
+------------------    ---------------------------------------------------------
 
-### Friday, September 10 
+### Friday, September 9 
 
-------------------    --------------------------------------------------------------------------------------
-**8:30-10:00**        Basic/Advanced comp. II (BSLC 109/205)                                                
-**10:00-10:30**       Coffee break                                                                          
-**10:30-12:00**       Basic/Advanced comp. II (BSLC 109/205)                                                
-**12:00-1:30**        Lunch                                                                                 
-**1:30-2:00**         Welcome to UChicago Biosciences - Prince (BSLC 109)                                   
-**2:00-3:45**         Professional development with TAs                                                     
-**3:45-4:15**         Coffee break                                                                          
-**4:15-5:00**         Science Faculty Star - Brent Doiron, Depts of Neurobiology and Statistics (BSLC 109)  
-------------------    --------------------------------------------------------------------------------------
+------------------    ---------------------------------------------------------
+**8:30-10:00**        Basic/Advanced comp. II (BSLC 008/109/205)               
+**10:00-10:30**       Coffee break                                             
+**10:30-12:00**       Basic/Advanced comp. II (BSLC 008/109/205)               
+**12:00-2:30**         Lunch and DuSable African American Museum Tour          
+**2:30-2:45**         Coffee break                                             
+**2:45-3:00**         Welcome to UChicago Biosciences - Dean Kovar (BSLC 109)  
+**3:00-4:30**         Professional development with TAs                        
+**4:30-5:00**         Coffee break                                             
+**5:00-6:00**         Graduate Student Research Talks (BSLC 109)               
+------------------    ---------------------------------------------------------
 
-### Monday, September 13 
+### Monday, September 12 
 
-------------------    --------------------------------------------------------------------------------------
-**8:30-10:00**        Defensive programming - Cobey (BSLC 109)                                              
-**10:00-10:30**       Coffee break                                                                          
-**10:30-12:00**       Defensive programming - Cobey (BSLC 109)                                              
-**12:00-1:30**        Lunch                                                                                 
-**1:30-3:00**         Data visualization - Carbonetto (BSLC 205)                                            
-**3:00-3:30**         Coffee break                                                                          
-**3:30-5:00**         Data visualization - Carbonetto (BSLC 205)                                            
-------------------    --------------------------------------------------------------------------------------
+------------------    ---------------------------------------------------------
+**8:30-10:00**        Defensive programming - Hernandez (BSLC 109)             
+**10:00-10:30**       Coffee break                                             
+**10:30-12:00**       Defensive programming - Hernandez (BSLC 109)             
+**12:00-1:30**        Lunch                                                    
+**1:30-3:00**         Data visualization - Carbonetto (BSLC 205)               
+**3:00-3:30**         Coffee break                                             
+**3:30-5:00**         Data visualization - Carbonetto (BSLC 205)               
+------------------    ---------------------------------------------------------
 
-### Tuesday, September 14 
+### Tuesday, September 13 
 
-------------------    --------------------------------------------------------------------------------------
-**8:30-10:00**        Statistics for a data rich world - L. Chen (BSLC 008)                                 
-**10:00-10:30**       Coffee break                                                                          
-**10:30-12:00**       Statistics for a data rich world - L. Chen (BSLC 008)                                 
-**12:00-1:30**        Lunch                                                                                 
-**1:30-3:00**         Workshop - Immunology - Khan (BSLC 109)                                               
-**3:00-3:30**         Coffee break                                                                          
-**3:30-5:00**         Workshop - Immunology - Khan (BSLC 109)                                               
-------------------    --------------------------------------------------------------------------------------
+------------------    ---------------------------------------------------------
+**8:30-10:00**        Statistics for a data rich world - L. Chen (BSLC 008)    
+**10:00-10:30**       Coffee break                                             
+**10:30-12:00**       Statistics for a data rich world - L. Chen (BSLC 008)    
+**12:00-1:30**        Lunch                                                    
+**1:30-3:00**         Workshop - Immunology - Khan (BSLC 109)                  
+**3:00-3:30**         Coffee break                                             
+**3:30-5:00**         Workshop - Immunology - Khan (BSLC 109)                  
+------------------    ---------------------------------------------------------
 
-### Wednesday, September 15 
+### Wednesday, September 14 
 
-------------------    --------------------------------------------------------------------------------------
-**8:30-10:00**        Workshop - Population genetics - Berg (BSLC 205)                                      
-**10:00-10:30**       Coffee break                                                                          
-**10:30-12:00**       Workshop - Population genetics - Berg (BSLC 205)                                      
-**12:00-1:30**        Lunch                                                                                 
-**1:30-3:00**         Workshop - Transcriptomics - M. Chen (BSLC 008)                                       
-**3:00-3:30**         Coffee break                                                                          
-**3:30-5:00**         Workshop - Transcriptomics - M. Chen (BSLC 008)                                       
-**5:15-5:45**         Wrap-up (BSLC 109)                                                                    
-**5:45-7:30**         Reception with Dean's Council Students                                                
-------------------    --------------------------------------------------------------------------------------
+------------------    ---------------------------------------------------------
+**8:30-10:00**        Workshop - Population genetics - Berg (BSLC 205)         
+**10:00-10:30**       Coffee break                                             
+**10:30-12:00**       Workshop - Population genetics - Berg (BSLC 205)         
+**12:00-1:30**        Lunch                                                    
+**1:30-3:00**         Workshop - Transcriptomics - M. Chen (BSLC 008)          
+**3:00-3:30**         Coffee break                                             
+**3:30-5:00**         Workshop - Transcriptomics - M. Chen (BSLC 008)          
+**5:15-5:45**         Wrap-up (BSLC 109)                                       
+**5:45-7:30**         Reception with Dean's Council Students                   
+------------------    ---------------------------------------------------------
 
 
 
