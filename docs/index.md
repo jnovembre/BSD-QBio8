@@ -1,6 +1,6 @@
 ## Welcome
 
-This page contains important information about the [Eigth BSD-qBio Boot Camp](https://biosciences.uchicago.edu/content/mbl-bootcamp), which will be held on campus from Sept 8-14, 2022.
+This page contains important information about the [Eighth BSD-qBio Boot Camp](https://biosciences.uchicago.edu/content/mbl-bootcamp), which will be held on campus from Sept 8-14, 2022.
 
 More than 100 incoming graduate students from the different programs in the [Division of Biological Sciences](https://biosciences.uchicago.edu) at the [University of Chicago](http://www.uchicago.edu) will participate.
 
