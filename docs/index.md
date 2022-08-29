@@ -12,19 +12,20 @@ You can see the **schedule** of the boot camp, and find the contact information 
 
 ## Contacts
 
-For any issue/question/comment, please contact the course directors via discord:
+For any issue/question/comment, please contact the course directors via email:
 
-*   [John Novembre](mailto:jnovembre@uchicago.edu?Subject=Help%20BSD%20QBio) ([webpage](https://jnpopgen.org/))
+*   [John Novembre](mailto:jnovembre@uchicago.edu?Subject=Help%20BSD%20QBio) ([webpage](http://jnpopgen.org/))
 *   [Peter Carbonetto](mailto:pcarbonetto@uchicago.edu?Subject=Help%20BSD%20QBio) ([webpage](https://cobeylab.uchicago.edu))
 
 ## Instructors
-* Jeremy Berg ([webpage](https://www.jjbpopgen.org))
-* Peter Carbonetto   ([webpage](https://pcarbo.github.io/))
-* Lin Chen ([webpage](https://home.uchicago.edu/lchen11/))
-* Mengjie Chen  ([webpage](https://www.mengjiechen.com))
-* Aly Khan ([webpage](https://ttic.uchicago.edu/~aakhan/))
-* Aarti Venkat ([webpage](https://biologicalsciences.uchicago.edu/faculty/aarti-venkat))
 
+* Jeremy Berg ([webpage](http://www.jjbpopgen.org))
+* Peter Carbonetto ([webpage](https://pcarbo.github.io/))
+* Lin Chen ([webpage](https://home.uchicago.edu/lchen11/))
+* Mengjie Chen ([webpage](https://www.mengjiechen.com))
+* Aly Khan ([webpage](https://ttic.uchicago.edu/~aakhan/))
+* John Novembre ([webpage](http://jnpopgen.org/)
+* Aarti Venkat ([webpage](https://biologicalsciences.uchicago.edu/faculty/aarti-venkat))
 
 ## TAs
 * Jennifer Blanc
