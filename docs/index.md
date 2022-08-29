@@ -2,7 +2,7 @@
 
 This page contains important information about the [Eighth BSD-qBio Boot Camp](https://biosciences.uchicago.edu/content/mbl-bootcamp), which will be held on campus from Sept 8-14, 2022.
 
-More than 100 incoming graduate students from the different programs in the [Division of Biological Sciences](https://biosciences.uchicago.edu) at the [University of Chicago](http://www.uchicago.edu) will participate.
+More than 100 incoming graduate students from the different programs in the [Division of Biological Sciences](https://biosciences.uchicago.edu) at the [University of Chicago](https://www.uchicago.edu) will participate.
 
 On this page, you find the instructions on how to **prepare your laptop** so that it's ready for the boot camp.
 
@@ -14,14 +14,14 @@ You can see the **schedule** of the boot camp, and find the contact information 
 
 For any issue/question/comment, please contact the course directors via discord:
 
-*   [John Novembre](mailto:jnovembre@uchicago.edu?Subject=Help%20BSD%20QBio) ([webpage](http://jnpopgen.org/))
+*   [John Novembre](mailto:jnovembre@uchicago.edu?Subject=Help%20BSD%20QBio) ([webpage](https://jnpopgen.org/))
 *   [Peter Carbonetto](mailto:pcarbonetto@uchicago.edu?Subject=Help%20BSD%20QBio) ([webpage](https://cobeylab.uchicago.edu))
 
 ## Instructors
-* Jeremy Berg ([webpage](http://www.jjbpopgen.org))
+* Jeremy Berg ([webpage](https://www.jjbpopgen.org))
 * Peter Carbonetto   ([webpage](https://pcarbo.github.io/))
-* Lin Chen ([webpage](http://home.uchicago.edu/lchen11/))
-* Mengjie Chen  ([webpage](http://www.mengjiechen.com))
+* Lin Chen ([webpage](https://home.uchicago.edu/lchen11/))
+* Mengjie Chen  ([webpage](https://www.mengjiechen.com))
 * Aly Khan ([webpage](https://ttic.uchicago.edu/~aakhan/))
 * Aarti Venkat ([webpage](https://biologicalsciences.uchicago.edu/faculty/aarti-venkat))
 
