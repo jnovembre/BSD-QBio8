@@ -106,7 +106,7 @@ All you need to do is to download the repository containing all the boot camp le
 
 The simplest way to download the repository is to down the ZIP file
 (click
-[here](https://codeload.github.com/jnovembre/BSD-QBio8/zip/refs/heads/main))
+[here](https://codeload.github.com/jnovembre/BSD-QBio8/zip/refs/heads/main)),
 then unzip the ZIP file. (This is a large file, so may take a few
 minutes or more to download depending on your connection speed.)
 
