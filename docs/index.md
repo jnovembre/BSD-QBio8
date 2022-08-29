@@ -79,35 +79,46 @@ You will work on your laptop all day long. **If you don't have a laptop, please 
     *   knitr
     *   workflowr
     *   ggthemes
+	*   ggrepel
     *   cowplot
     *   Rtsne
     *   BiocManager
     *   ggseqlogo
     *   pheatmap
+	*   plotly
+	*   htmlwidgets
 
     You can find instructions on how to install `R` packages in RStudio [here](https://www.youtube.com/watch?v=3RWb5U3X-T8).
 
-* **Other packages** After the package installs above, two more sets of the packages need to be installed using special installers within `R`. First, open Rstudio and in the Console type `library(devtools)`, hit Return (or Enter) and then `install_github("jdstorey/qvalue")`. This will install the library `qvalue` that is needed for one of the tutorials.  Second, type `library(BiocManager)` hit Return (or Enter) and then,
+* **Other packages** After the package installs above, two more sets of the packages need to be installed using special installers within `R`. First, open Rstudio and in the Console type `library(remotes)`, hit Return (or Enter) and then `install_github("jdstorey/qvalue")`. This will install the library `qvalue` that is needed for one of the tutorials. Second, type `library(BiocManager)` hit Return (or Enter) and then,
 `BiocManager::install(c("airway","Rsamtools","Rsubread","DESeq2","vsn", "org.Hs.eg.db","GenomicFeatures", "clusterProfiler"))`.  This should install 8 libraries that will be used for the RNAseq workshop.
 
 * **UNIX Emulator**: If you are using Windows, you need to install a UNIX emulator. We suggest downloading the version control software `Git`, because it ships with a small emulator (`Git Bash`). Simply go to [this page](https://git-scm.com/download/win) and follow the instructions.
 
 * **Git**
-    * **Join GitHub** click [here](https://education.github.com/pack/join) and make sure you use your uchicago email to get free tools.
+    * **Join GitHub** click [here](https://education.github.com/pack) and make sure you use your uchicago email to get free tools.
     * **Download GitKraken** click [here](https://support.gitkraken.com/how-to-install)
 
 ## Downloading the data
 
 It is very important to download the data **before the workshop**, as the files are quite large. (Warning! The repo is >200MB!)
 All you need to do is to download the repository containing all the boot camp lectures and data.
-We will download the repository using GitKraken (you can alternatively use command-line `git` if you are already familiar with it).
+
+The simplest way to download the repository is to down the ZIP file
+(click
+[here](https://codeload.github.com/jnovembre/BSD-QBio8/zip/refs/heads/main))
+then unzip the ZIP file. (This is a large file, so may take a few
+minutes or more to download depending on your connection speed.)
+
+Alternatively, you can use GitKraken (or command-line `git` if you are
+already familiar with it):
 
 1. Open GitKraken (see download link above)
 2. Login with your GitHub account (see instructions and link above)
 3. "Clone a Repo" (in File menu)
 4. "Clone with URL"
 5. "Where to Clone:" Browse to the folder in which you want to keep your repository (your home directory is fine)
-6. "URL": Paste: `https://github.com/jnovembre/BSD-QBio7.git`
+6. "URL": Paste: `https://github.com/jnovembre/BSD-QBio8.git`
 7. "Clone the Repo!" (this step will take a few minutes)
 
 Now if you go to the folder you chose in step 5, you'll see the repository!
