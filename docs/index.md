@@ -24,7 +24,7 @@ For any issue/question/comment, please contact the course directors via email:
 * Lin Chen ([webpage](https://home.uchicago.edu/lchen11/))
 * Mengjie Chen ([webpage](https://www.mengjiechen.com))
 * Aly Khan ([webpage](https://ttic.uchicago.edu/~aakhan/))
-* John Novembre ([webpage](http://jnpopgen.org/)
+* John Novembre ([webpage](http://jnpopgen.org/))
 * Aarti Venkat ([webpage](https://biologicalsciences.uchicago.edu/faculty/aarti-venkat))
 
 ## TAs
