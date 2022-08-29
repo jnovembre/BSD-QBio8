@@ -122,11 +122,13 @@ already familiar with it):
 7. "Clone the Repo!" (this step will take a few minutes)
 
 Now if you go to the folder you chose in step 5, you'll see the
-repository! **Note:** To clone the repository on your computer, you
-may first need to create a "personal access token". See
+repository!
+
+**Note:** To clone the repository on your computer, you may first need
+to create a "personal access token" (PAT). See
 [here](https://support.gitkraken.com/developers/pats) or
 [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
-for instructions.
+for instructions on creatinga PAT.
 
 ## Programming Challenges
 
