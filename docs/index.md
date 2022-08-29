@@ -121,13 +121,18 @@ already familiar with it):
 6. "URL": Paste: `https://github.com/jnovembre/BSD-QBio8.git`
 7. "Clone the Repo!" (this step will take a few minutes)
 
-Now if you go to the folder you chose in step 5, you'll see the repository!
+Now if you go to the folder you chose in step 5, you'll see the
+repository! **Note:** To clone the repository on your computer, you
+may first need to create a "personal access token". See
+[here](https://support.gitkraken.com/developers/pats) or
+[here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+for instructions.
 
 ## Programming Challenges
 
 During the boot camp, the 12 groups of students will compete through 5 programming challenges. Here are the links to the webpages where the groups should post their solutions (one answer per group, please):
 
-*PLEASE NOTE THESE LINKS NOT YET UPDATED FOR 2022*
+*PLEASE NOTE THESE LINKS ARE NOT YET UPDATED FOR 2022*
 
 * Submit your answer to [Programming Challenge 1 (Basic Programming I)](https://forms.gle/w93jnanysf8L8BXn9)
 * Submit your answer to [Programming Challenge 2 (Basic Programming II)](https://forms.gle/pK13yMf3ac2pcJCh8)
