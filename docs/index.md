@@ -127,7 +127,7 @@ Now if you go to the folder you chose in step 5, you'll see the repository!
 
 During the boot camp, the 12 groups of students will compete through 5 programming challenges. Here are the links to the webpages where the groups should post their solutions (one answer per group, please):
 
-[NOTE: PLEASE NOTE THESE LINKS NOT YET UPDATED FOR 2022]
+*PLEASE NOTE THESE LINKS NOT YET UPDATED FOR 2022*
 
 * Submit your answer to [Programming Challenge 1 (Basic Programming I)](https://forms.gle/w93jnanysf8L8BXn9)
 * Submit your answer to [Programming Challenge 2 (Basic Programming II)](https://forms.gle/pK13yMf3ac2pcJCh8)
