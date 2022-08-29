@@ -28,6 +28,7 @@ For any issue/question/comment, please contact the course directors via email:
 * Aarti Venkat ([webpage](https://biologicalsciences.uchicago.edu/faculty/aarti-venkat))
 
 ## TAs
+
 * Jennifer Blanc
 * Cody Cole
 * Annisa Dea
@@ -54,9 +55,9 @@ To accommodate the diverse background of our students, we have created two track
 
 **You will need to decide which track's sessions to attend on Day 1 of the Bootcamp**.  After Day 1, you will move throught the material in teams with mixed skill levels.  **Choose which track to join for Day 1 by consulting the lecture materials and making sure that the content is at the right level for you**:
 
-*   Basic Computing I ([web](https://github.com/jnovembre/BSD-QBio8/blob/master/tutorials/basic_computing_1/basic_computing_1.Rmd), [pdf](https://github.com/jnovembre/BSD-QBio7/raw/master/tutorials/basic_computing_1/basic_computing_1.pdf))
-*   Basic Computing II ([web](https://github.com/jnovembre/BSD-QBio8/blob/master/tutorials/basic_computing_2/basic_computing_2.Rmd), [pdf](https://github.com/jnovembre/BSD-QBio8/raw/master/tutorials/basic_computing_2/basic_computing_2.pdf))
-*   Advanced Computing: **Special preparation for Advanced Computing:** You should work through the Advanced Computing preparatory material before the session begins. [Link to preparatory material](https://github.com/jnovembre/BSD-QBio8/blob/master/tutorials/advanced_computing/tutorial/advanced_computing.pdf)
+* Basic Computing I ([web](https://github.com/jnovembre/BSD-QBio8/blob/main/tutorials/basic_computing_1/basic_computing_1.pdf), [pdf](https://raw.githubusercontent.com/jnovembre/BSD-QBio8/main/tutorials/basic_computing_1/basic_computing_1.pdf))
+* Basic Computing II ([web](https://github.com/jnovembre/BSD-QBio8/blob/main/tutorials/basic_computing_2/basic_computing_2.pdf), [pdf](https://raw.githubusercontent.com/jnovembre/BSD-QBio8/main/tutorials/basic_computing_2/basic_computing_2.pdf))
+* Advanced Computing: **Special preparation for Advanced Computing:** You should work through the Advanced Computing preparatory material before the session begins. [Link to preparatory material](https://github.com/jnovembre/BSD-QBio8/blob/master/tutorials/advanced_computing/tutorial/advanced_computing.pdf)
 
 
 ## Preparing your laptop
