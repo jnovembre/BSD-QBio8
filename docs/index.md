@@ -42,7 +42,7 @@ For any issue/question/comment, please contact the course directors via email:
 
 The qBio boot camp will be, as the name implies, quite intense. We are going to have **Tutorials** (short primers to a certain topic) and **Workshops** (discipline-specific, hands-on activities).
 
-Here's the [general schedule](https://github.com/jnovembre/BSD-QBio8/raw/master/schedule/GeneralSchedule.pdf).
+Here's the [general schedule](https://github.com/jnovembre/BSD-QBio8/blob/main/schedule/GeneralSchedule.pdf).
 
 You can also browse the schedule [by group](https://github.com/jnovembre/BSD-QBio8/tree/master/schedule).
 
@@ -70,9 +70,9 @@ You will work on your laptop all day long. **If you don't have a laptop, please 
 
 *   **Install R**: go to [this page](https://cran.rstudio.com/), download the file corresponding to your platform, and install it. (Here's a [video](https://www.youtube.com/watch?v=5ZbjUEg4a1g) explaining how to install R and RStudio in Windows; [here](https://www.youtube.com/watch?v=5rp9bkc68y0) for Mac OSX)
 
-*   **Install RStudio**: once installed R, go to [this page](https://www.rstudio.com/products/rstudio/download/), download the installer for your operating system (section **Installers for Supported Platforms**), and install the software.
+*   **Install RStudio**: once you have installed R, go to [this page](https://www.rstudio.com/products/rstudio/download/), download the installer for your operating system (section **Installers for Supported Platforms**), and install the software.
 
-*   Once installed R and RStudio, open RStudio and **install the following packages**:
+*   Once you have installed R and RStudio, open RStudio and **install the following packages**:
 
     *   devtools
     *   tidyverse
@@ -96,8 +96,8 @@ You will work on your laptop all day long. **If you don't have a laptop, please 
 * **UNIX Emulator**: If you are using Windows, you need to install a UNIX emulator. We suggest downloading the version control software `Git`, because it ships with a small emulator (`Git Bash`). Simply go to [this page](https://git-scm.com/download/win) and follow the instructions.
 
 * **Git**
-    * **Join GitHub** click [here](https://education.github.com/pack) and make sure you use your uchicago email to get free tools.
-    * **Download GitKraken** click [here](https://support.gitkraken.com/how-to-install)
+    * **Join GitHub** click [here](https://education.github.com/pack) and make sure you use your uchicago email to get free access to some free benefits.
+    * Unless you will use git from the command line, **Download GitKraken** click [here](https://support.gitkraken.com/how-to-install)
 
 ## Downloading the data
 
@@ -128,13 +128,13 @@ repository!
 to create a "personal access token" (PAT). See
 [here](https://support.gitkraken.com/developers/pats) or
 [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
-for instructions on creatinga PAT.
+for instructions on creating a PAT.
 
 ## Programming Challenges
 
 During the boot camp, the 12 groups of students will compete through 5 programming challenges. Here are the links to the webpages where the groups should post their solutions (one answer per group, please):
 
-*PLEASE NOTE THESE LINKS ARE NOT YET UPDATED FOR 2022*
+*PLEASE NOTE THESE LINKS ARE NOT YET UPDATED FOR 2022.*
 
 * Submit your answer to [Programming Challenge 1 (Basic Programming I)](https://forms.gle/w93jnanysf8L8BXn9)
 * Submit your answer to [Programming Challenge 2 (Basic Programming II)](https://forms.gle/pK13yMf3ac2pcJCh8)
