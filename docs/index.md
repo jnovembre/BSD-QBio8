@@ -42,7 +42,7 @@ For any issue/question/comment, please contact the course directors via email:
 
 The qBio boot camp will be, as the name implies, quite intense. We are going to have **Tutorials** (short primers to a certain topic) and **Workshops** (discipline-specific, hands-on activities).
 
-Here's the [general schedule](https://github.com/jnovembre/BSD-QBio8/raw/master/schedule/GeneralSchedule.pdf).
+Here's the [general schedule](https://github.com/jnovembre/BSD-QBio8/blob/main/schedule/GeneralSchedule.pdf).
 
 You can also browse the schedule [by group](https://github.com/jnovembre/BSD-QBio8/tree/master/schedule).
 
@@ -134,7 +134,7 @@ for instructions on creating a PAT.
 
 During the boot camp, the 12 groups of students will compete through 5 programming challenges. Here are the links to the webpages where the groups should post their solutions (one answer per group, please):
 
-*PLEASE NOTE THESE LINKS ARE NOT YET UPDATED FOR 2022*
+*PLEASE NOTE THESE LINKS ARE NOT YET UPDATED FOR 2022.*
 
 * Submit your answer to [Programming Challenge 1 (Basic Programming I)](https://forms.gle/w93jnanysf8L8BXn9)
 * Submit your answer to [Programming Challenge 2 (Basic Programming II)](https://forms.gle/pK13yMf3ac2pcJCh8)
