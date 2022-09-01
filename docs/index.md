@@ -68,7 +68,14 @@ You will work on your laptop all day long. **If you don't have a laptop, please 
 
 ### Installation of `R` and `R` packages
 
-*   **Install R**: go to [this page](https://cran.rstudio.com/), download the file corresponding to your platform, and install it. (Here's a [video](https://www.youtube.com/watch?v=5ZbjUEg4a1g) explaining how to install R and RStudio in Windows; [here](https://www.youtube.com/watch?v=5rp9bkc68y0) for Mac OSX)
+* **Install R**: go to [this page](https://cran.rstudio.com/),
+download the file corresponding to your platform, and install
+it. (Here's a [video](https://www.youtube.com/watch?v=5ZbjUEg4a1g)
+explaining how to install R and RStudio in Windows;
+[here](https://www.youtube.com/watch?v=5rp9bkc68y0) for Mac OSX)
+**Note:** For those with a Mac with one of the new Apple processors
+(M1 or M2), *don't* use the "arm64 build" with R. The non-arm64 build
+will require you to first install [Rosetta](https://support.apple.com/en-us/HT211861) (if you haven't done so already).
 
 *   **Install RStudio**: once you have installed R, go to [this page](https://www.rstudio.com/products/rstudio/download/), download the installer for your operating system (section **Installers for Supported Platforms**), and install the software.
 
@@ -91,7 +98,7 @@ You will work on your laptop all day long. **If you don't have a laptop, please 
     You can find instructions on how to install `R` packages in RStudio [here](https://www.youtube.com/watch?v=3RWb5U3X-T8).
 
 * **Other packages** After the package installs above, two more sets of the packages need to be installed using special installers within `R`. First, open Rstudio and in the Console type `library(remotes)`, hit Return (or Enter) and then `install_github("jdstorey/qvalue")`. This will install the library `qvalue` that is needed for one of the tutorials. Second, type `library(BiocManager)` hit Return (or Enter) and then,
-`BiocManager::install(c("airway","Rsamtools","Rsubread","DESeq2","vsn", "org.Hs.eg.db","GenomicFeatures", "clusterProfiler"))`.  This should install 8 libraries that will be used for the RNAseq workshop.
+`BiocManager::install(c("airway","Rsamtools","Rsubread","DESeq2","vsn", "org.Hs.eg.db","GenomicFeatures", "clusterProfiler"))`.  This should install the 8 libraries that will be used for the RNAseq workshop.
 
 * **UNIX Emulator**: If you are using Windows, you need to install a UNIX emulator. We suggest downloading the version control software `Git`, because it ships with a small emulator (`Git Bash`). Simply go to [this page](https://git-scm.com/download/win) and follow the instructions.
 
