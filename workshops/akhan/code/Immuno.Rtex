@@ -130,9 +130,9 @@
 %	BOOK META-INFORMATION
 %----------------------------------------------------------------------------------------
 
-\title{Computational Immunobiology} % Title of the book
+\title{Computational Immunology} % Title of the book
 
-\author[Computational Immunobiology]{Computational Immunobiology} % Author
+\author[Computational Immunology]{Computational Immunology} % Author
 
 
 %----------------------------------------------------------------------------------------
@@ -140,7 +140,7 @@
 \begin{document}
 
 
-\chapter{Workshop on Computational Immunobiology}
+\chapter{Workshop on Computational Immunology}
 \Large Aly A. Khan\textsuperscript{1}, Matt Schechter\textsuperscript{2}
 
 \Large 
@@ -154,18 +154,18 @@
 
 \end{fullwidth}
 
-\newthought{Welcome}. This workshop will introduce a few useful concepts for computationally thinking about the immune system. Immunology is currently undergoing a data-driven revolution, where advances in computer science and high-throughput technologies are allowing us to approach questions that previously could not be answered using purely experimental approaches or standard reductionist techniques. \marginnote{\textbf{BSD courses:} Other courses that may broaden your experience in quantitative and computational immunology include: Microbial 'Omics (BIOS 25420) and Quantitative Immunobiology (IMMU 34800).} In this workshop we will explore two concepts: 
+\newthought{Welcome}. This workshop will introduce a few useful concepts for thinking about the immune system computationally. Immunology is currently undergoing a data-driven revolution, with advances in computer science and high-throughput technologies allowing us to address questions that could not previously be answered using purely experimental approaches or standard reductionist techniques.\marginnote{\textbf{BSD courses:} Other courses that may broaden your experience in quantitative and computational immunology include: Immunogenomics (IMMU 48000) and Quantitative Immunobiology (MENG 23300).} In this workshop, we will look at two ideas:
 
 \begin{enumerate}
   \item What are some methods for characterizing the phenotypic diversity and population structure of immune cells?
   \item How can statistical modeling be used to make useful predictions about the immune system?
 \end{enumerate}
 
-\newthought{What is the immune system?} The immune system can be viewed as a loosely connected network of cells that interact to solve problems that are beyond the individual capabilities of each cell. At the same time, the immune system has the ability to communicate between cells, coordinate collective action, and remember past events. The field of immunology has amassed a vast and specialized body of knowledge describing the common biological mechanisms underlying host defense, transplantation, autoimmunity, tumor immunology, allergy, and other clinical challenges.
+\newthought{What is the immune system?} The immune system can be viewed as a loosely connected network of cells that interact to solve problems that are beyond the individual capabilities of each cell. At the same time, the immune system has the ability to communicate between cells, coordinate collective action, and remember past events. Immunology has amassed a vast and specialized body of knowledge describing the common biological mechanisms underlying host defense, transplantation, autoimmunity, tumor immunology, allergy, and other clinical challenges.
 
-The immune system's role in host defense is frequently framed by an attacked host (e.g., self) against alien invaders (e.g. non-self; viruses, bacteria, cancer cells, etc). This conflict has serious ramifications. Because collateral damage and misfiring can cause significant harm, the immune system must function precisely to distinguish between self and non-self (e.g. autoimmunity, allergy, etc). Strikingly, we still do not fully understand how the immune system accomplishes this exquisite role or why certain individuals develop autoimmunity.
+The immune system's role in host defense is frequently framed in terms of an attacked host (i.e., self) defending itself against alien invaders (i.e. non-self; viruses, bacteria, cancer cells, etc).  This conflict has far-reaching consequences. Because collateral damage and misfiring can cause significant harm, the immune system must be able to distinguish between self and non-self with pinpoint accuracy or risk harm to its self (e.g. autoimmunity, allergy, etc). It may come as a surprise to you, but we still don't fully understand how the immune system performs this exquisite role or why some people develop autoimmunity.
 
-We hope that as you progress through your graduate studies, you will notice that there are a myriad of exciting opportunities available to biologists who are willing to cross and explore the traditional boundaries between immunology and computer science.
+We hope that as you continue your graduate studies, you will notice that there are a myriad of exciting opportunities available to scientists willing to cross and explore the traditional boundaries between immunology and computer science.
 
 \section{\textbf{1. Visualizing the population structure of immune cells}} \marginnote{This section is adapted from Neu et al., Trends in Immunology, 2017.}
 
@@ -368,22 +368,20 @@ While single cell transcriptional profiles have high dimensionality due to the t
 
 
 \section{\textbf{2. Peptide-MHC interactions}} 
-Nearly every cell in our body is decorated with a class of molecules known as major histocompatibility complex (MHC). The function of the MHC is to bind peptide fragments (antigens) derived from pathogens and display them on the cell surface for recognition by components of the immune system. In particular, alien peptides may be recognized by cytotoxic T cells, which can destroy infected cells.  Understanding the binding affinity of MHC proteins and the repertoire of cognate peptide ligands is important for advancing our understanding of the antigenic landscape in infectious diseases, autoimmunity, vaccine design, and cancer immunotherapy.
+Just about every cell in our body is decorated with a class of molecules known as major histocompatibility complexes (MHC). The MHC binds pathogen-derived peptide fragments (antigens) and displays them on the cell surface for recognition by immune system components. Alien peptides, in particular, may be recognized by cytotoxic T cells, which can kill infected cells. Understanding the binding affinity of MHC proteins and the repertoire of cognate peptide ligands is critical for improving our understanding of the antigenic landscape in infectious diseases, autoimmunity, vaccine design, and cancer immunotherapy.
 \begin{figure}
 \includegraphics{graphics/HLA.pdf}
 \caption{
 Structure of a peptide-MHC complex. (A) Front view of the crystal structure 1I4F depicting a space-filled molecular surface representation of the MHC (HLA-A*02:01) protein bound with a peptide (derived from MAGEA4, in purple), and (B) a backbone ribbon representation of the MHC. The heavy chain of MHC (alpha), which contains the binding cleft, is depicted in green. The supporting light chain (Beta-2 Microglobulin) is depicted in brown. (C,D)  Top view of the complex showing the surface of the MHC (green) and the exposed surface of the bound peptide (purple).  The exposed part of the peptide is referred to as the ``TCR-interacting surface” of the peptide-MHC complex. }\label{fig:textfig}
 \end{figure}
 
-
-
-Due to the importance of this process, peptide-MHC binding has been experimentally studied in a variety of ways. For example, the relative binding ability of different peptides to a specific MHC molecule can be directly assessed by competition experiments. The result of such experiments is a set of relative binding energies for different MHC-peptide combinations. In this section, we will model the repertoire of peptide ligands associated with a specific MHC molecule.
+Because of the importance of this process, peptide-MHC binding has been studied experimentally in a variety of ways. Competition experiments, for example, can directly assess the relative binding ability of different peptides to a specific MHC molecule. Such experiments yield a set of relative binding energies for various MHC-peptide combinations. In this section, we will create a model of the peptide ligand repertoire associated with a particular MHC molecule.
 
 
 \subsection{\textbf{Exercise 2.1}}
 
 \subsection{Exercise 2.1 --- Overview discussion}
-Our goal for this exercise is to load some HLA-peptide sequence and binding affinity data. If you are new to analyzing sequence data (or string data structures), let's take a moment to consider how this data structure differs from numerical data structures, and what are some operations we might want to perform on biological strings, such as sequence alignment.  We can also review concepts such as edit distance and k-mers.
+Our goal for this exercise is to load and analyze some HLA-peptide sequence and binding affinity data. If you're new to analyzing sequence data (or string data structures), consider how this data structure differs from numerical data structures and what operations, such as sequence alignment, we might want to perform on biological strings. We can also go over concepts like edit distance and k-mers.
 
 \subsection{Exercise 2.1 --- Data wrangling}
 \marginnote{\textbf{IEDB} is a public database of immune epitope information.  The database contains data related to antibody and T cell epitopes for humans, non-human primates, rodents, and other animal species. In particular, the database contains extensive MHC class I binding data from a variety of different antigenic sources.} High-throughout screening through competition experiments have resulted in large datasets cataloging binding affinities between various MHC molecules and peptides. Let's begin by downloading some peptide-MHC binding data. For this exercise we will be using data from the The Immune Epitope Database (IEDB) \url{http://tools.iedb.org/mhci/download/} 
@@ -423,12 +421,12 @@ head(iedb)
 
 \subsection{Exercise 2.1 --- Results discussion}
 
-\newthought{Why is this interesting?} Several T-cell based cancer immunotherapies are being engineered to drive anti-tumor immune responses for specific antigens presented by the human MHC allele HLA-A*02:01. In cancer, somatic mutations altering the amino acid sequence of endogenous protein coding genes can result in the generation of tumor-specific HLA-presented antigenic peptide epitopes (or neo-antigens). These neo-antigens have the potential to activate cytotoxic T lymphocytes (e.g. CD8+ T cells) of the host immune system through HLA class I molecules, thereby provoking an anti-tumor immune response.  
+\newthought{Why is this interesting?} Several T-cell-based cancer immunotherapies are being developed to stimulate anti-tumor immune responses to antigens presented by the human MHC allele HLA-A*02:01. Somatic mutations in endogenous protein coding genes that change the amino acid sequence can result in the generation of tumor-specific HLA-presented antigenic peptide epitopes (or neo-antigens). These neo-antigens have the potential to activate cytotoxic T lymphocytes (e.g. CD8+ T cells) of the host immune system through MHC molecules, thereby provoking an anti-tumor immune response.  
 
-It stands to reason that if we knew the binding specificity of a given MHC, we could evaluate different somatic mutations in a cancer sample and determine if it could be presented by the cancer. Given the data available, can we model the repertoire of high affinity peptides that are presented by the human HLA-A*02:01 allele? 
+Let us take a step back and consider how we might be able to create personalized cancer therapies. It stands to reason that if we knew the binding specificity of a given MHC, we could assess different somatic mutations in a cancer sample and determine if the cancer could present it. So given the data available, can we model the repertoire of high affinity peptides that are presented by the human HLA-A*02:01 allele?
 
 \subsection{Exercise 2.2 --- Overview discussion}
-Our goal for this exercise is to infer the pattern of amino acid specificity in high affinity peptides for a specific HLA.  In other words, what positions and letters show a bias or preference for binding HLA-A*02:01?  Let's assume each position of a peptide binds independently to the HLA molecule, how could we use intuition from statistics to approach this question?  What are the possible letters or alphabet used in the peptides?  How can we calculate what are the observed frequencies for a given position?
+Our goal for this exercise is to infer the pattern of amino acid specificity in high affinity peptides for a specific HLA.  In other words, what positions and letters show a bias or preference for binding HLA-A*02:01?  Assuming that each position of a peptide binds independently to the HLA molecule, how can we approach this question using statistical intuition? What are the possible letters or alphabets used in peptides? How can we determine the observed frequencies for a given position?
 
 
 \subsection{Exercise 2.2 --- Data Visualization}
@@ -465,16 +463,14 @@ filtered_iedb = subset(iedb, species=='human'
 @
 
 
-\noindent Next, let's try to model the distribution in a position specific manner: 
+\noindent What is the most frequent amino acid in these peptides?  What is the \textbf{second} most frequent amino acid in these peptides? Let's now try to model the distribution in a position specific manner: 
 
 <<eval = FALSE>>=
 # let's grab the peptide sequences
 listOfSequences = filtered_iedb[,4]
 
-# number of sequences
+# number and length of sequences
 numSequences = length(listOfSequences)
-  
-# length of each sequence
 lengthOfSequence = nchar(listOfSequences[1])
   
 # find unique characters in list of sequences
@@ -531,7 +527,7 @@ What positions of the high affinity peptides to seem to be highly specific for b
 
 
 \subsection{\textbf{Conclusion}}
-Although we have made tremendous progress in modelling peptide-MHC interactions over the past several decades, connecting which T cells interact with which MHC-bound antigens remains a challenge.  An efficent solution to this problem would have broad applications in improving our understanding of T cells in health, autoimmunity, and cancer (and potentially a free trip to Sweden). This remains a challenging task, in part, due to the enormous number of potential T cell receptors, the diversity of the MHC and bound antigen peptides. However, new computational methods may help resolve TCR-pMHC interactions by integrating and learning complex patterns from diverse high-throughput experimental approaches.
+Despite significant advances in modeling peptide-MHC interactions over the last several decades, determining which T cells interact with which MHC-bound antigens remains a challenge. A successful solution to this problem would have far-reaching implications for our understanding of T cells in health, autoimmunity, and cancer (and potentially a free trip to Sweden). This is a difficult task, in part because of the large number of potential T cell receptors, the diversity of the MHC, and the bound antigen peptides. New computational methods, on the other hand, may aid in the resolution of TCR-pMHC interactions by integrating and learning complex patterns from diverse high-throughput experimental approaches. 
 
 
 \begin{figure}
