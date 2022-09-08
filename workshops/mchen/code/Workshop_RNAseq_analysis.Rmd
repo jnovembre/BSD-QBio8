@@ -6,9 +6,9 @@ output:
     latex_engine: pdflatex
     template: readable.tex
 author:
-  name: "Mengjie Chen (with Kate Farris)"
+  name: "Mengjie Chen (with Jelena Scepanovic)"
   affiliation: University of Chicago
-date: August 25, 2021
+date: August 25, 2022
 chapter: 7
 geometry: margin=1in
 fontfamily: mathpazo
