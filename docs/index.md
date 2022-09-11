@@ -23,6 +23,7 @@ For any issue/question/comment, please contact the course directors via email:
 * Peter Carbonetto ([webpage](https://pcarbo.github.io/))
 * Lin Chen ([webpage](https://home.uchicago.edu/lchen11/))
 * Mengjie Chen ([webpage](https://www.mengjiechen.com))
+* Kyle Hernandez ([webpage](https://kmhernan.github.io))
 * Aly Khan ([webpage](https://ttic.uchicago.edu/~aakhan/))
 * John Novembre ([webpage](http://jnpopgen.org/))
 * Aarti Venkat ([webpage](https://biologicalsciences.uchicago.edu/faculty/aarti-venkat))
