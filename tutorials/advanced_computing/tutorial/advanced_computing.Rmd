@@ -7,12 +7,12 @@ author:
     affiliation: University of Chicago
 date: "August 16, 2022"
 output:
+  html_document:
+    df_print: paged
   pdf_document:
     keep_tex: true
     latex_engine: pdflatex
     template: readable_advanced_computing.tex
-  html_document:
-    df_print: paged
 chapter: 3
 geometry: margin=1in
 fontfamily: mathpazo
@@ -157,7 +157,7 @@ pubs %>%
   summarise(avg = mean(`Cited by`))
 ```
 
-> **Exercise:** count the number of articles by UofC researcher in *Nature* and *Science* by `Source title` and `Year`.
+> **Exercise:** count the number of articles by UofC researchers in *Nature* and *Science* by `Source title` and `Year`.
 
 ## Ordering the data 
 
@@ -597,7 +597,7 @@ $$
 
 ## Exercise in groups
 
-Chicago's Divvy bike-share system (the light blue bikes you will see around town) collects data on all its rides and shares them publically, after anonymizing the rider info (https://www.divvybikes.com/system-data).  The file `data/202107-divvy-tripdata.csv` contains a list of all the Divvy bike rides taken in Chicago in July 2021. Form small groups and work on the following exercises.  Hint: use the package `lubridate` to work with days, dates, time:
+Chicago's Divvy bike-share system (the light blue bikes you will see around town) collects data on all its rides and shares them publically, after anonymizing the rider info (https://www.divvybikes.com/system-data).  The file `data/202207-divvy-tripdata.csv` contains a list of all the Divvy bike rides taken in Chicago in July 2022. Form small groups and work on the following exercises.  Hint: use the package `lubridate` to work with days, dates, time:
 
 - **Ride map** write a function that takes as input a calendar date (YYYY-MM-DD), and draws a map of all the starting points of rides. Mark a point for each occurrence using the starting latitude and longitude `start_lat` and `start_lng`. Set the `alpha` to something like 0.1 to show brighter colors in areas with many occurrences.  Use color to indicate member type or ride type (Optional: Add a feature that draws a line from the starting location to end location)
 
@@ -609,7 +609,7 @@ Chicago's Divvy bike-share system (the light blue bikes you will see around town
 
 - **Number of rides of different lengths by day of the week** plot the number of rides against the day of the week, faceting by ride length class. 
 
-- **Rides by neighborhood** write a function that takes as input a given day, and produces a histogram of the number of rides per neighborhood on that day (i.e. x-axis is number of rides, y-axis is number of neighborhoods). A table relating `starting_station_id` to neighborhood (where neighborhood is assigned using the Google Maps API) is found in the file `data/202107-divvy-station_id_neighborhoods.csv`. You will need to `join` the tables before plotting.  What is the mean number of rides per neighborhood?  What is the max number?  What are the top 5 "neighborhoods" for Divvy rides.
+- **Rides by neighborhood** write a function that takes as input a given day, and produces a histogram of the number of rides per neighborhood on that day (i.e. x-axis is number of rides, y-axis is number of neighborhoods). A table relating `starting_station_id` to neighborhood (where neighborhood is assigned using the Google Maps API) is found in the file `data/202207-divvy-station_id_neighborhoods.csv`. You will need to `join` the tables before plotting.  What is the mean number of rides per neighborhood?  What is the max number?  What are the top 5 "neighborhoods" for Divvy rides.
 
 - **Interactions**: Create a table with the starting station, ending station, and the number of rides between each station.   What is a feature of the most frequent trips that you observe? (Advanced: Create a graph showing edges connecting stations where the edge color represents the number of trips taken)
 

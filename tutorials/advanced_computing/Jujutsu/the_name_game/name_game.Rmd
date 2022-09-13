@@ -1,14 +1,16 @@
 ---
 title: "Data Jujutsu I -- The name game"
-output:
-  pdf_document:
-    keep_tex: false
-    latex_engine: pdflatex
-    template: readable.tex
 author:
   name: Stefano Allesina and Graham Smith
   affiliation: University of Chicago
-date: August 26, 2021
+date: "August 26, 2021"
+output:
+  html_document:
+    df_print: paged
+  pdf_document:
+    keep_tex: no
+    latex_engine: pdflatex
+    template: readable.tex
 geometry: margin=1in
 fontfamily: mathpazo
 fontsize: 11pt
@@ -16,7 +18,9 @@ spacing: single
 graphics: yes
 endnote: no
 chapter: 3--J1
-thanks: "This document is included as part of the Advanced Computing tutorial packet for the BSD qBio Bootcamp, University of Chicago, 2021. **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: sallesina@uchicago.edu."
+thanks: 'This document is included as part of the Advanced Computing tutorial packet
+  for the BSD qBio Bootcamp, University of Chicago, 2021. **Current version**: `r
+  format(Sys.time(), ''%B %d, %Y'')`; **Corresponding author**: sallesina@uchicago.edu.'
 ---
 
 ```{r setup, echo=FALSE, eval=TRUE}
@@ -85,8 +89,8 @@ con <- unz(temp, "yob2012.txt")
 dt <- read.table(con, header = FALSE, sep = ",", stringsAsFactors = FALSE) 
 ```
 
-* Don't read the names as `factors` (the default in `read.table`) as binding together long lists of factors takes much time. 
+* Don't read the names as `factors` (the default in `read.table`, so use the option `stringsAsFactors = FALSE`) as binding together long lists of factors takes much time. 
 
-* Save your elaborated data, to save the time it takes to download and parse the data when you re-run your code. For extra brownie points, write your code such that it checks if the data have been parsed already before starting the download. You can use `file.exists()` to check whether a file is present or not.
+* Save your elaborated data, to save the time it takes to download and parse the data when you re-run your code. For extra squid points, write your code such that it checks if the data have been parsed already before starting the download. You can use `file.exists()` to check whether a file is present or not.
 
 
